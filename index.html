@@ -14,23 +14,22 @@
     <source src="assets/song.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Confetti Container (Triggered only on successful balloon pop) -->
+  <!-- Confetti Container -->
   <div class="confetti-container" id="confetti-container"></div>
 
   <!-- SCENE 1: PASSCODE ENTRY -->
   <div id="scene-passcode" class="scene active">
     <div class="passcode-card">
-      <div class="header-icon">🎈</div>
       <h2>Secret Code</h2>
       <p>Enter the 6-digit birthday passcode</p>
       
-      <div class="passcode-display">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+      <div class="passcode-display" id="passcode-display">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
       </div>
 
       <div class="keypad">
@@ -56,7 +55,6 @@
     <div class="aesthetic-bg-glow"></div>
     <div class="floral-overlay">
       <div class="string-wrapper" id="string-wrapper">
-        <!-- Big Realistic Balloon -->
         <div id="interactive-element" class="big-balloon">
           <div class="balloon-gloss"></div>
         </div>
@@ -75,19 +73,11 @@
 
       <div class="cake-box" id="cake-box">
         <div class="realistic-cake">
-          <!-- 3 Candles with Sequential Lighting -->
           <div class="candles-row">
-            <div class="candle" id="candle-1">
-              <div class="flame"></div>
-            </div>
-            <div class="candle" id="candle-2">
-              <div class="flame"></div>
-            </div>
-            <div class="candle" id="candle-3">
-              <div class="flame"></div>
-            </div>
+            <div class="candle" id="candle-1"><div class="flame"></div></div>
+            <div class="candle" id="candle-2"><div class="flame"></div></div>
+            <div class="candle" id="candle-3"><div class="flame"></div></div>
           </div>
-          <!-- 3D/Realistic Dripping Chocolate Cake Design -->
           <div class="dripping-icing"></div>
           <div class="cake-layer layer-1"></div>
           <div class="cake-layer layer-2"></div>
@@ -100,7 +90,7 @@
     </div>
   </div>
 
- <!-- SCENE 4: LETTER -->
+  <!-- SCENE 4: LETTER -->
   <div id="scene-letter" class="scene">
     <div class="letter-container">
       <h2 class="letter-title">A Special Note For You <span class="heart-symbol">💛</span></h2>
@@ -121,7 +111,8 @@
       </div>
     </div>
   </div>
-  <!-- SCENE 5: STARRY GALAXY PHOTO GALLERY -->
+
+  <!-- SCENE 5: STARRY GALAXY PHOTO GALLERY (SCATTERED & HIGHLY FLOATING) -->
   <div id="scene-galaxy" class="scene">
     <div class="stars-bg"></div>
     <div class="galaxy-title">
@@ -130,25 +121,29 @@
     </div>
 
     <div class="floating-container">
-      <div class="polaroid" onclick="showPhotoModal('assets/photo1.jpg', 'Partner in Crime! 💛')">
-        <img src="assets/photo1.jpg" alt="Memory 1">
+      <div class="polaroid p1" onclick="showPhotoModal('photo1.jpg.jpeg', 'Partner in Crime! 💛')">
+        <img src="photo1.jpg.jpeg" alt="Memory 1">
         <span>Sunshine</span>
       </div>
-      <div class="polaroid" onclick="showPhotoModal('assets/photo2.jpg', 'Best Times Ever ✨')">
-        <img src="assets/photo2.jpg" alt="Memory 2">
+      <div class="polaroid p2" onclick="showPhotoModal('photo2.jpeg', 'Best Times Ever ✨')">
+        <img src="photo2.jpeg" alt="Memory 2">
         <span>Bestie</span>
       </div>
-      <div class="polaroid" onclick="showPhotoModal('assets/photo3.jpg', 'Always Laughing Together 😃')">
-        <img src="assets/photo3.jpg" alt="Memory 3">
+      <div class="polaroid p3" onclick="showPhotoModal('photo3.jpeg', 'Always Laughing Together 😃')">
+        <img src="photo3.jpeg" alt="Memory 3">
         <span>Unstoppable</span>
       </div>
-      <div class="polaroid" onclick="showPhotoModal('assets/photo4.jpg', 'Crazy Moments 📸')">
-        <img src="assets/photo4.jpg" alt="Memory 4">
+      <div class="polaroid p4" onclick="showPhotoModal('photo4.jpeg', 'Crazy Moments 📸')">
+        <img src="photo4.jpeg" alt="Memory 4">
         <span>Iconic</span>
       </div>
-      <div class="polaroid" onclick="showPhotoModal('assets/photo5.jpg', 'Forever & Always 💫')">
-        <img src="assets/photo5.jpg" alt="Memory 5">
+      <div class="polaroid p5" onclick="showPhotoModal('photo5.jpeg', 'Forever & Always 💫')">
+        <img src="photo5.jpeg" alt="Memory 5">
         <span>My Anchor</span>
+      </div>
+      <div class="polaroid p6" onclick="showPhotoModal('photo6.jpeg', 'Precious Memories 🌟')">
+        <img src="photo6.jpeg" alt="Memory 6">
+        <span>Special Bond</span>
       </div>
     </div>
 
