@@ -409,34 +409,60 @@ body, html {
 
 .btn.hidden { display: none; }
 
-/* SCENE 4: LETTER */
+/* SCENE 4: LETTER & ENVELOPE STYLING */
 #scene-letter {
   background: radial-gradient(circle, #3b0764 0%, #0f172a 100%);
 }
 
+.letter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+}
+
+/* Bigger & Balanced Title */
+.letter-title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 35px;
+  background: linear-gradient(to right, #f43f5e, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+  text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Bigger & Premium Envelope Box */
 .envelope {
-  width: 240px;
-  height: 150px;
+  width: 340px;
+  height: 210px;
   background: linear-gradient(135deg, #f43f5e, #be123c);
-  border-radius: 12px;
+  border-radius: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   font-weight: 600;
+  font-size: 1.2rem;
   cursor: pointer;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-  transition: transform 0.3s;
+  box-shadow: 0 20px 45px rgba(244, 63, 94, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
 }
 
 .envelope:hover {
-  transform: scale(1.05);
+  transform: scale(1.06);
+  box-shadow: 0 25px 55px rgba(244, 63, 94, 0.5);
 }
 
 .letter-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
@@ -450,19 +476,21 @@ body, html {
 .letter-content {
   background: rgba(30, 41, 59, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 30px;
+  padding: 35px;
   border-radius: 24px;
-  max-width: 500px;
+  max-width: 520px;
   max-height: 80vh;
   overflow-y: auto;
   box-shadow: 0 20px 40px rgba(0,0,0,0.5);
   color: #f8fafc;
   line-height: 1.7;
+  text-align: left;
 }
 
 .letter-content h3 {
   color: #fbbf24;
   margin-bottom: 15px;
+  font-size: 1.3rem;
 }
 
 .letter-content p {
@@ -474,8 +502,8 @@ body, html {
 .signature {
   font-weight: bold;
   color: #fbbf24;
+  margin-top: 15px;
 }
-
 /* SCENE 5: GALAXY & POLAROIDS */
 #scene-galaxy {
   background: #090d16;
