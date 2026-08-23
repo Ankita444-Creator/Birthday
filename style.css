@@ -35,13 +35,18 @@ body, html {
   display: flex;
 }
 
-/* AESTHETIC CONFETTI / CHIMILI BACKGROUND ANIMATION */
+/* CONFETTI - TRIGGERED ONLY ON SUCCESSFUL POP */
 .confetti-container {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 99;
   overflow: hidden;
+  display: none;
+}
+
+.confetti-container.active {
+  display: block;
 }
 
 .confetti-piece {
@@ -50,8 +55,8 @@ body, html {
   height: 16px;
   background: var(--primary-yellow);
   top: -20px;
-  opacity: 0.8;
-  animation: fallConfetti linear infinite;
+  opacity: 0.9;
+  animation: fallConfetti linear forwards;
 }
 
 @keyframes fallConfetti {
@@ -60,12 +65,12 @@ body, html {
     opacity: 1;
   }
   100% {
-    transform: translateY(105vh) rotate(720deg) translateX(50px);
+    transform: translateY(105vh) rotate(720deg) translateX(60px);
     opacity: 0.2;
   }
 }
 
-/* SCENE 1: AESTHETIC GLASS PASSCODE CARD */
+/* SCENE 1: PASSCODE CARD */
 #scene-passcode {
   background: radial-gradient(circle at top right, #3b0764, #1e1b4b, #0f172a);
 }
@@ -149,7 +154,7 @@ body, html {
   min-height: 18px;
 }
 
-/* SCENE 2: BALLOONS & STRING TRANSITION */
+/* SCENE 2: BIG BALLOON & STRING PULL */
 #scene-floral {
   position: relative;
   overflow: hidden;
@@ -178,35 +183,67 @@ body, html {
 
 .string-wrapper {
   position: relative;
-  height: 220px;
+  height: 250px;
   cursor: grab;
   touch-action: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.hanging-balloon {
-  font-size: 3.5rem;
+/* Big Realistic Balloon Styling */
+.big-balloon {
+  width: 70px;
+  height: 85px;
+  background: radial-gradient(circle at 30% 30%, #ff758c, #ff7eb3 40%, #c71585 100%);
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  position: relative;
+  box-shadow: inset -6px -6px 15px rgba(0,0,0,0.3), 0 10px 20px rgba(244,63,94,0.4);
   animation: floatBalloon 2s infinite alternate ease-in-out;
 }
 
+.balloon-gloss {
+  position: absolute;
+  top: 12px;
+  left: 15px;
+  width: 14px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: rotate(-30deg);
+}
+
+/* Balloon Knot */
+.big-balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 31px;
+  width: 8px;
+  height: 8px;
+  background: #c71585;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+
 @keyframes floatBalloon {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-8px); }
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-8px) scale(1.02); }
 }
 
 .string {
-  width: 3px;
-  height: 130px;
-  background: rgba(255, 255, 255, 0.5);
-  margin: 0 auto;
+  width: 2px;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.6);
+  margin-top: -2px;
   transition: height 0.1s;
 }
 
 .handle {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   background: #fbbf24;
   border-radius: 50%;
-  margin: -9px auto 0 auto;
+  margin-top: -8px;
   box-shadow: 0 0 10px #fbbf24;
 }
 
@@ -216,7 +253,7 @@ body, html {
   letter-spacing: 0.5px;
 }
 
-/* SCENE 3: AESTHETIC DRIPPING CAKE */
+/* SCENE 3: REALISTIC CAKE & CANDLE LIGHTING */
 #scene-cake {
   background: radial-gradient(circle at bottom, #1e1b4b, #0f172a);
   text-align: center;
@@ -238,8 +275,8 @@ body, html {
 
 .cake-box {
   position: relative;
-  width: 280px;
-  height: 240px;
+  width: 300px;
+  height: 260px;
   margin: 30px auto;
   cursor: ew-resize;
   background: rgba(255, 255, 255, 0.04);
@@ -248,79 +285,95 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }
 
-.pixel-cake {
-  width: 210px;
-  height: 150px;
+/* Realistic 3D/Shaded Cake Container */
+.realistic-cake {
+  width: 220px;
+  height: 170px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   position: relative;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
 }
 
 .candles-row {
   display: flex;
-  gap: 22px;
-  margin-bottom: 8px;
+  gap: 28px;
+  margin-bottom: 6px;
+  z-index: 3;
 }
 
 .candle {
   width: 10px;
-  height: 35px;
-  background: #f43f5e;
+  height: 40px;
+  background: linear-gradient(90deg, #ff758c, #ff7eb3);
   position: relative;
-  border-radius: 3px;
+  border-radius: 4px;
+  box-shadow: inset -2px 0 4px rgba(0,0,0,0.2);
 }
 
 .flame {
-  width: 10px;
-  height: 16px;
+  width: 12px;
+  height: 18px;
   background: #fbbf24;
   border-radius: 50% 50% 20% 20%;
   position: absolute;
-  top: -16px;
-  left: 0px;
-  box-shadow: 0 0 10px #fbbf24;
+  top: -18px;
+  left: -1px;
+  box-shadow: 0 0 12px #fbbf24, 0 0 20px #f59e0b;
+  opacity: 0; /* Initially unlit */
+  transform: scale(0);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.flame.lit {
+  opacity: 1;
+  transform: scale(1);
   animation: flicker 0.4s infinite alternate;
 }
 
-/* Dripping Chocolate & White Icing Layer */
+/* Dripping Chocolate Icing with Depth */
 .dripping-icing {
-  width: 195px;
-  height: 30px;
-  background: #f8fafc;
-  border-radius: 14px 14px 6px 6px;
+  width: 205px;
+  height: 35px;
+  background: linear-gradient(135deg, #451a03, #270e01);
+  border-radius: 16px 16px 8px 8px;
   position: relative;
-  box-shadow: 0 4px 0 #cbd5e1;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  z-index: 2;
 }
 
 .dripping-icing::after {
   content: '';
   position: absolute;
-  bottom: -10px;
+  bottom: -12px;
   left: 15px;
-  width: 20px;
-  height: 15px;
-  background: #f8fafc;
+  width: 18px;
+  height: 18px;
+  background: #270e01;
   border-radius: 0 0 10px 10px;
-  box-shadow: 40px 5px 0 #f8fafc, 90px 2px 0 #f8fafc, 130px 8px 0 #f8fafc;
+  box-shadow: 45px 6px 0 #270e01, 95px 3px 0 #270e01, 140px 10px 0 #270e01;
 }
 
 .cake-layer {
-  width: 190px;
-  height: 42px;
-  background: #1e293b; /* Dark Chocolate Look */
-  border-bottom: 4px solid #0f172a;
+  width: 200px;
+  height: 45px;
+  background: linear-gradient(90deg, #78350f, #92400e, #78350f);
+  border-bottom: 3px solid #451a03;
   border-radius: 4px;
+  z-index: 1;
+  box-shadow: inset 0 5px 10px rgba(0,0,0,0.3);
 }
 
-.cake-layer.light-layer {
-  width: 210px;
-  background: #334155;
-  border-radius: 0 0 10px 10px;
+.cake-layer.layer-2 {
+  width: 215px;
+  height: 50px;
+  border-radius: 0 0 12px 12px;
+  background: linear-gradient(90deg, #451a03, #78350f, #451a03);
 }
 
 .swipe-line {
@@ -333,6 +386,7 @@ body, html {
   transition: width 0.1s;
   box-shadow: 0 0 12px #f43f5e;
   pointer-events: none;
+  z-index: 10;
 }
 
 .btn {
@@ -346,6 +400,7 @@ body, html {
   cursor: pointer;
   box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
   transition: transform 0.2s;
+  margin-top: 15px;
 }
 
 .btn:active {
@@ -522,8 +577,8 @@ body, html {
 }
 
 @keyframes flicker {
-  0% { opacity: 0.8; }
-  100% { opacity: 1; transform: scale(1.1); }
+  0% { opacity: 0.8; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1.05); }
 }
 
 @keyframes floatRandom {
