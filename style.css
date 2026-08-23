@@ -699,9 +699,3 @@ body, html {
   color: #f8fafc;
   font-size: 0.9rem;
 }
-/* Secret Code এর ওপরের ছোট বেলুন হাইড করার জন্য */
-.scene-passcode .balloon, 
-#scene-passcode .balloon,
-.passcode-container .balloon {
-  display: none !important;
-}
