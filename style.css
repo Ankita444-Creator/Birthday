@@ -447,8 +447,7 @@ body, html {
 .letter-content h3 { color: #fbbf24; margin-bottom: 15px; }
 .letter-content p { margin-bottom: 12px; color: #cbd5e1; }
 .signature { font-weight: bold; color: #fbbf24; margin-top: 15px; }
-
-/* SCENE 5: MAGICAL GALAXY & PERFECTLY BALANCED POLAROIDS */
+/* SCENE 5: MAGICAL GALAXY & TIGHTLY ARRANGED POLAROIDS */
 #scene-galaxy {
   background: radial-gradient(circle at center, #0a0e1a 0%, #030508 100%);
   color: white;
@@ -486,7 +485,7 @@ body, html {
 
 .galaxy-title {
   position: absolute;
-  top: 20px;
+  top: 25px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -502,6 +501,11 @@ body, html {
   filter: drop-shadow(0 0 18px rgba(244,63,94,0.5));
 }
 
+/* Extra box/icon remove korar jonno fixed */
+.galaxy-title span {
+  display: none !important;
+}
+
 .galaxy-title p {
   color: #94a3b8;
   font-size: 0.9rem;
@@ -515,12 +519,12 @@ body, html {
   height: 100%;
 }
 
-/* Polaroids arranged closer to center, removing large dead space */
+/* Polaroids setup */
 .polaroid {
   position: absolute;
-  width: 270px;
+  width: 260px;
   background: white;
-  padding: 12px 12px 20px 12px;
+  padding: 12px 12px 18px 12px;
   box-shadow: 0 20px 45px rgba(0,0,0,0.65), 0 0 30px rgba(255, 255, 255, 0.12);
   border-radius: 12px;
   text-align: center;
@@ -539,9 +543,9 @@ body, html {
 }
 
 .polaroid span {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  margin-top: 10px;
+  margin-top: 8px;
   display: block;
   color: #1e293b;
 }
@@ -552,30 +556,30 @@ body, html {
   z-index: 50;
 }
 
-/* Balanced positioning closer inward so center has nice composition */
-.p1 { top: 18%; left: 14%; animation: floatBalanced1 4.5s ease-in-out infinite alternate; }
-.p2 { top: 18%; right: 14%; animation: floatBalanced2 5s ease-in-out infinite alternate; }
-.p3 { bottom: 12%; left: 16%; animation: floatBalanced3 4.2s ease-in-out infinite alternate; }
-.p4 { bottom: 12%; right: 16%; animation: floatBalanced4 4.8s ease-in-out infinite alternate; }
+/* Majhkhane faka jaiga kom korar jonno inward & compact arrangement */
+.p1 { top: 22%; left: 24%; animation: floatTight1 4s ease-in-out infinite alternate; }
+.p2 { top: 22%; right: 24%; animation: floatTight2 4.5s ease-in-out infinite alternate; }
+.p3 { bottom: 14%; left: 26%; animation: floatTight3 4.2s ease-in-out infinite alternate; }
+.p4 { bottom: 14%; right: 26%; animation: floatTight4 4.8s ease-in-out infinite alternate; }
 
-@keyframes floatBalanced1 {
-  0% { transform: translateY(0px) rotate(-5deg); }
-  100% { transform: translateY(-20px) rotate(-2deg); }
-}
-
-@keyframes floatBalanced2 {
-  0% { transform: translateY(0px) rotate(5deg); }
-  100% { transform: translateY(20px) rotate(2deg); }
-}
-
-@keyframes floatBalanced3 {
-  0% { transform: translateY(0px) rotate(4deg); }
-  100% { transform: translateY(-20px) rotate(-1deg); }
-}
-
-@keyframes floatBalanced4 {
+@keyframes floatTight1 {
   0% { transform: translateY(0px) rotate(-4deg); }
-  100% { transform: translateY(20px) rotate(2deg); }
+  100% { transform: translateY(-15px) rotate(-1deg); }
+}
+
+@keyframes floatTight2 {
+  0% { transform: translateY(0px) rotate(4deg); }
+  100% { transform: translateY(15px) rotate(1deg); }
+}
+
+@keyframes floatTight3 {
+  0% { transform: translateY(0px) rotate(3deg); }
+  100% { transform: translateY(-15px) rotate(-2deg); }
+}
+
+@keyframes floatTight4 {
+  0% { transform: translateY(0px) rotate(-3deg); }
+  100% { transform: translateY(15px) rotate(2deg); }
 }
 
 .photo-modal {
