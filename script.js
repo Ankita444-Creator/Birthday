@@ -68,6 +68,14 @@ function checkPasscode() {
     clearKeypad();
   }
 }
+// পাসকোড সঠিক হলে বা প্রথম সিন চালু হওয়ার সময় গান বাজবে
+const bgMusic = document.getElementById('bg-music');
+if (bgMusic) {
+  bgMusic.volume = 0.6; // সাউন্ড লেভেল (০.৬ মানে ৬০% ভলিউম)
+  bgMusic.play().catch(e => {
+    console.log("Autoplay prevented, waiting for user click.");
+  });
+}
 
 // SCENE NAVIGATION
 function goToScene(sceneId) {
