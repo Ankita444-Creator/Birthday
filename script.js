@@ -1,12 +1,13 @@
-// FUNCTION TO LAUNCH CONFETTI ONLY WHEN SUCCESSFUL
+// CONTINUOUS PARTY PAPER / CONFETTI SHOWER
 function triggerConfettiShower() {
   const container = document.getElementById("confetti-container");
   container.classList.add("active");
-  container.innerHTML = "";
   
   const colors = ["#f43f5e", "#fbbf24", "#8b5cf6", "#06b6d4", "#ec4899", "#34d399"];
   
-  for (let i = 0; i < 70; i++) {
+  // Continuous interval for falling confetti
+  setInterval(() => {
+    if (document.hidden) return;
     const piece = document.createElement("div");
     piece.classList.add("confetti-piece");
     piece.style.left = Math.random() * 100 + "vw";
@@ -14,14 +15,16 @@ function triggerConfettiShower() {
     piece.style.width = Math.random() * 8 + 6 + "px";
     piece.style.height = Math.random() * 14 + 10 + "px";
     
-    const duration = Math.random() * 2 + 2;
+    const duration = Math.random() * 3 + 2;
     piece.style.animationDuration = duration + "s";
-    piece.style.animationDelay = Math.random() * 0.5 + "s";
     
     container.appendChild(piece);
-  }
+    
+    setTimeout(() => {
+      piece.remove();
+    }, duration * 1000);
+  }, 150);
 }
-
 // PASSCODE LOGIC
 const CORRECT_PASSCODE = "667070"; 
 let currentInput = "";
