@@ -14,12 +14,13 @@
     <source src="assets/song.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Confetti Container -->
+  <!-- Confetti Container (Triggered only on successful balloon pop) -->
   <div class="confetti-container" id="confetti-container"></div>
 
   <!-- SCENE 1: PASSCODE ENTRY -->
   <div id="scene-passcode" class="scene active">
     <div class="passcode-card">
+      <div class="header-icon">🎈</div>
       <h2>Secret Code</h2>
       <p>Enter the 6-digit birthday passcode</p>
       
@@ -86,7 +87,7 @@
               <div class="flame"></div>
             </div>
           </div>
-          <!-- Dripping Chocolate Cake Design -->
+          <!-- 3D/Realistic Dripping Chocolate Cake Design -->
           <div class="dripping-icing"></div>
           <div class="cake-layer layer-1"></div>
           <div class="cake-layer layer-2"></div>
@@ -102,7 +103,7 @@
   <!-- SCENE 4: LETTER -->
   <div id="scene-letter" class="scene">
     <div class="letter-container">
-      <h2 class="letter-title">A Special Note For You <span class="heart-symbol">💛</span></h2>
+      <h2>A Special Note For You 💌</h2>
       <div class="envelope" id="envelope" onclick="openLetter()">
         <div class="envelope-flap"></div>
         <div class="envelope-paper">Tap to Open</div>
