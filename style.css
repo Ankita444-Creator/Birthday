@@ -451,34 +451,38 @@ body, html {
 .signature { font-weight: bold; color: #fbbf24; margin-top: 12px; }
 
 /* ========================================================
-   SCENE 5: MAGICAL GALAXY & UNIFIED RESPONSIVE FLOATING
+   SCENE 5: BULLETPROOF RESPONSIVE GALAXY SECTION
    ======================================================== */
 #scene-galaxy {
   background: radial-gradient(circle at center, #0a0e1a 0%, #030508 100%);
   color: white;
   position: relative;
-  overflow: hidden;
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
+  /* Mobile default: Scrollable container to prevent clipping */
+  overflow-y: auto; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px;
 }
 
 .stars-bg {
   position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   background-image: 
     radial-gradient(3.5px 3.5px at 40px 60px, #ffffff, rgba(0,0,0,0)),
     radial-gradient(4px 4px at 180px 220px, #fbbf24, rgba(0,0,0,0)),
     radial-gradient(3px 3px at 350px 120px, #67e8f9, rgba(0,0,0,0)),
-    radial-gradient(4.5px 4.5px at 550px 350px, #f43f5e, rgba(0,0,0,0)),
-    radial-gradient(3.5px 3.5px at 750px 180px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(4px 4px at 950px 500px, #fbbf24, rgba(0,0,0,0)),
-    radial-gradient(3px 3px at 250px 450px, #a78bfa, rgba(0,0,0,0)),
-    radial-gradient(4px 4px at 650px 100px, #38bdf8, rgba(0,0,0,0));
+    radial-gradient(4.5px 4.5px at 550px 350px, #f43f5e, rgba(0,0,0,0));
   background-repeat: repeat;
   background-size: 500px 500px;
   animation: galaxyTwinkle 8s linear infinite;
   opacity: 0.95;
+  pointer-events: none;
 }
 
 @keyframes galaxyTwinkle {
@@ -488,13 +492,10 @@ body, html {
 }
 
 .galaxy-title {
-  position: absolute;
-  top: 15px;
-  left: 50%;
-  transform: translateX(-50%);
   text-align: center;
   z-index: 10;
-  width: 100%;
+  margin-bottom: 15px;
+  flex-shrink: 0;
 }
 
 .galaxy-title h2 {
@@ -502,7 +503,7 @@ body, html {
   background: linear-gradient(to right, #f43f5e, #fbbf24, #06b6d4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 15px rgba(244,63,94,0.5));
+  filter: drop-shadow(0 0 10px rgba(244,63,94,0.5));
 }
 
 .galaxy-title span {
@@ -511,29 +512,29 @@ body, html {
 
 .galaxy-title p {
   color: #94a3b8;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   margin-top: 2px;
 }
 
+/* --- MOBILE VIEW: CLEAN 2x2 GRID (No overlap, compact spacing) --- */
 .floating-container {
-  position: absolute;
-  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
   width: 100%;
-  height: 100%;
+  max-width: 340px;
+  z-index: 10;
+  margin: auto 0;
 }
 
-/* Base Mobile Size & Positions (Compact Floating) */
 .polaroid {
-  position: absolute;
-  width: 155px;
   background: white;
-  padding: 7px 7px 12px 7px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.65);
+  padding: 6px 6px 10px 6px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
   border-radius: 8px;
   text-align: center;
   color: #333;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .polaroid img {
@@ -546,24 +547,97 @@ body, html {
 }
 
 .polaroid span {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  margin-top: 5px;
+  margin-top: 4px;
   display: block;
   color: #1e293b;
 }
 
-.polaroid:hover {
-  transform: scale(1.08) translateY(-5px) rotate(0deg) !important;
-  box-shadow: 0 20px 40px rgba(244, 63, 94, 0.7);
-  z-index: 50;
+/* Reset transforms for mobile grid */
+.p1, .p2, .p3, .p4 {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  animation: none !important;
 }
 
-/* Mobile Coordinates (Side-by-side floating, minimal gap) */
-.p1 { top: 18%; left: 4%; animation: floatTight1 4s ease-in-out infinite alternate; }
-.p2 { top: 18%; right: 4%; animation: floatTight2 4.5s ease-in-out infinite alternate; }
-.p3 { bottom: 8%; left: 4%; animation: floatTight3 4.2s ease-in-out infinite alternate; }
-.p4 { bottom: 8%; right: 4%; animation: floatTight4 4.8s ease-in-out infinite alternate; }
+
+/* --- LAPTOP / DESKTOP VIEW: ABSOLUTE FLOATING GALAXY --- */
+@media (min-width: 768px) {
+  #scene-galaxy {
+    overflow: hidden;
+    padding: 0;
+    display: block;
+  }
+
+  .galaxy-title {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 0;
+  }
+
+  .galaxy-title h2 {
+    font-size: 2.2rem;
+  }
+
+  .galaxy-title p {
+    font-size: 0.9rem;
+  }
+
+  .floating-container {
+    display: block;
+    position: absolute;
+    inset: 0;
+    max-width: none;
+    margin: 0;
+  }
+
+  .polaroid {
+    position: absolute !important;
+    width: 260px;
+    padding: 12px 12px 18px 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .polaroid span {
+    font-size: 0.9rem;
+    margin-top: 8px;
+  }
+
+  .polaroid:hover {
+    transform: scale(1.08) translateY(-5px) rotate(0deg) !important;
+    box-shadow: 0 20px 40px rgba(244, 63, 94, 0.7);
+    z-index: 50;
+  }
+
+  /* Specific desktop floating positions and animations */
+  .p1 { 
+    top: 22% !important; 
+    left: 24% !important; 
+    animation: floatTight1 4s ease-in-out infinite alternate !important; 
+  }
+  .p2 { 
+    top: 22% !important; 
+    right: 24% !important; 
+    animation: floatTight2 4.5s ease-in-out infinite alternate !important; 
+  }
+  .p3 { 
+    bottom: 14% !important; 
+    left: 26% !important; 
+    animation: floatTight3 4.2s ease-in-out infinite alternate !important; 
+  }
+  .p4 { 
+    bottom: 14% !important; 
+    right: 26% !important; 
+    animation: floatTight4 4.8s ease-in-out infinite alternate !important; 
+  }
+}
 
 @keyframes floatTight1 {
   0% { transform: translateY(0px) rotate(-3deg); }
@@ -583,31 +657,6 @@ body, html {
 @keyframes floatTight4 {
   0% { transform: translateY(0px) rotate(-2deg); }
   100% { transform: translateY(8px) rotate(2deg); }
-}
-
-/* Laptop / Desktop View (Larger sizes & wider positioning) */
-@media (min-width: 768px) {
-  .galaxy-title {
-    top: 25px;
-  }
-  .galaxy-title h2 {
-    font-size: 2.2rem;
-  }
-  .galaxy-title p {
-    font-size: 0.9rem;
-  }
-  .polaroid {
-    width: 260px;
-    padding: 12px 12px 18px 12px;
-  }
-  .polaroid span {
-    font-size: 0.9rem;
-    margin-top: 8px;
-  }
-  .p1 { top: 22%; left: 24%; }
-  .p2 { top: 22%; right: 24%; }
-  .p3 { bottom: 14%; left: 26%; }
-  .p4 { bottom: 14%; right: 26%; }
 }
 
 .photo-modal {
