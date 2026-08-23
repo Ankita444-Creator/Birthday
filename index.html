@@ -14,12 +14,15 @@
     <source src="assets/song.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- Floating Confetti & Party Papers Container -->
+  <div class="confetti-container" id="confetti-container"></div>
+
   <!-- SCENE 1: PASSCODE ENTRY -->
   <div id="scene-passcode" class="scene active">
     <div class="passcode-card">
-      <div class="header-icon">✨</div>
-      <h2>Enter Passcode</h2>
-      <p>Enter the 6-digit secret code to unlock</p>
+      <div class="header-icon">🎈</div>
+      <h2>Secret Code</h2>
+      <p>Enter the 6-digit birthday passcode</p>
       
       <div class="passcode-display">
         <span class="dot"></span>
@@ -48,20 +51,20 @@
     </div>
   </div>
 
-  <!-- SCENE 2: YELLOW ROSE FLORAL & STRING -->
+  <!-- SCENE 2: BALLOONS & PULL STRING TRANSITION -->
   <div id="scene-floral" class="scene">
-    <div class="floral-bg"></div>
+    <div class="aesthetic-bg-glow"></div>
     <div class="floral-overlay">
       <div class="string-wrapper" id="string-wrapper">
-        <div id="interactive-element" class="hanging-bulb">💡</div>
+        <div id="interactive-element" class="hanging-balloon">🎈</div>
         <div class="string" id="pull-string"></div>
         <div class="handle"></div>
       </div>
-      <p class="pull-text">Drag or pull the string down to unwrap! 💛</p>
+      <p class="pull-text">Drag or pull the string down to pop the party! ✨</p>
     </div>
   </div>
 
-  <!-- SCENE 3: CAKE CUTTING -->
+  <!-- SCENE 3: AESTHETIC DRIPPING CAKE CUTTING -->
   <div id="scene-cake" class="scene">
     <div class="cake-container">
       <h2>Swipe to Cut the Cake! 🎂</h2>
@@ -74,9 +77,10 @@
             <div class="candle"><div class="flame"></div></div>
             <div class="candle"><div class="flame"></div></div>
           </div>
-          <div class="icing"></div>
-          <div class="cake-layer layer-1"></div>
-          <div class="cake-layer layer-2"></div>
+          <!-- Dripping Aesthetic Cake Design -->
+          <div class="dripping-icing"></div>
+          <div class="cake-layer dark-layer"></div>
+          <div class="cake-layer light-layer"></div>
         </div>
         <div class="swipe-line" id="swipe-line"></div>
       </div>
