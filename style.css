@@ -35,7 +35,7 @@ body, html {
   display: flex;
 }
 
-/* CONFETTI - TRIGGERED ONLY ON SUCCESSFUL POP */
+/* CONFETTI */
 .confetti-container {
   position: fixed;
   inset: 0;
@@ -60,14 +60,8 @@ body, html {
 }
 
 @keyframes fallConfetti {
-  0% {
-    transform: translateY(0) rotate(0deg) translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(105vh) rotate(720deg) translateX(60px);
-    opacity: 0.2;
-  }
+  0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg) translateX(60px); opacity: 0.2; }
 }
 
 /* SCENE 1: PASSCODE CARD */
@@ -154,7 +148,7 @@ body, html {
   min-height: 18px;
 }
 
-/* SCENE 2: BIG BALLOON & STRING PULL */
+/* SCENE 2: BIG BALLOON */
 #scene-floral {
   position: relative;
   overflow: hidden;
@@ -191,7 +185,6 @@ body, html {
   align-items: center;
 }
 
-/* Big Realistic Balloon Styling */
 .big-balloon {
   width: 70px;
   height: 85px;
@@ -213,7 +206,6 @@ body, html {
   transform: rotate(-30deg);
 }
 
-/* Balloon Knot */
 .big-balloon::after {
   content: '';
   position: absolute;
@@ -253,7 +245,7 @@ body, html {
   letter-spacing: 0.5px;
 }
 
-/* SCENE 3: REALISTIC CAKE & CANDLE LIGHTING */
+/* SCENE 3: CAKE */
 #scene-cake {
   background: radial-gradient(circle at bottom, #1e1b4b, #0f172a);
   text-align: center;
@@ -288,7 +280,6 @@ body, html {
   box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }
 
-/* Realistic 3D/Shaded Cake Container */
 .realistic-cake {
   width: 220px;
   height: 170px;
@@ -313,7 +304,6 @@ body, html {
   background: linear-gradient(90deg, #ff758c, #ff7eb3);
   position: relative;
   border-radius: 4px;
-  box-shadow: inset -2px 0 4px rgba(0,0,0,0.2);
 }
 
 .flame {
@@ -325,7 +315,7 @@ body, html {
   top: -18px;
   left: -1px;
   box-shadow: 0 0 12px #fbbf24, 0 0 20px #f59e0b;
-  opacity: 0; /* Initially unlit */
+  opacity: 0;
   transform: scale(0);
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -336,27 +326,13 @@ body, html {
   animation: flicker 0.4s infinite alternate;
 }
 
-/* Dripping Chocolate Icing with Depth */
 .dripping-icing {
   width: 205px;
   height: 35px;
   background: linear-gradient(135deg, #451a03, #270e01);
   border-radius: 16px 16px 8px 8px;
   position: relative;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
   z-index: 2;
-}
-
-.dripping-icing::after {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 15px;
-  width: 18px;
-  height: 18px;
-  background: #270e01;
-  border-radius: 0 0 10px 10px;
-  box-shadow: 45px 6px 0 #270e01, 95px 3px 0 #270e01, 140px 10px 0 #270e01;
 }
 
 .cake-layer {
@@ -366,7 +342,6 @@ body, html {
   border-bottom: 3px solid #451a03;
   border-radius: 4px;
   z-index: 1;
-  box-shadow: inset 0 5px 10px rgba(0,0,0,0.3);
 }
 
 .cake-layer.layer-2 {
@@ -384,9 +359,8 @@ body, html {
   top: 50%;
   left: 0;
   transition: width 0.1s;
-  box-shadow: 0 0 12px #f43f5e;
-  pointer-events: none;
   z-index: 10;
+  pointer-events: none;
 }
 
 .btn {
@@ -399,17 +373,12 @@ body, html {
   border-radius: 30px;
   cursor: pointer;
   box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
-  transition: transform 0.2s;
   margin-top: 15px;
-}
-
-.btn:active {
-  transform: scale(0.95);
 }
 
 .btn.hidden { display: none; }
 
-/* SCENE 4: LETTER & ENVELOPE STYLING */
+/* SCENE 4: LETTER */
 #scene-letter {
   background: radial-gradient(circle, #3b0764 0%, #0f172a 100%);
 }
@@ -424,7 +393,6 @@ body, html {
   width: 100%;
 }
 
-/* Bigger & Balanced Title */
 .letter-title {
   font-size: 2.2rem;
   font-weight: 600;
@@ -432,11 +400,8 @@ body, html {
   background: linear-gradient(to right, #f43f5e, #fbbf24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 0.5px;
-  text-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-/* Bigger & Premium Envelope Box */
 .envelope {
   width: 340px;
   height: 210px;
@@ -450,13 +415,6 @@ body, html {
   font-size: 1.2rem;
   cursor: pointer;
   box-shadow: 0 20px 45px rgba(244, 63, 94, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
-}
-
-.envelope:hover {
-  transform: scale(1.06);
-  box-shadow: 0 25px 55px rgba(244, 63, 94, 0.5);
 }
 
 .letter-modal {
@@ -481,33 +439,21 @@ body, html {
   max-width: 520px;
   max-height: 80vh;
   overflow-y: auto;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
   color: #f8fafc;
   line-height: 1.7;
   text-align: left;
 }
 
-.letter-content h3 {
-  color: #fbbf24;
-  margin-bottom: 15px;
-  font-size: 1.3rem;
-}
+.letter-content h3 { color: #fbbf24; margin-bottom: 15px; }
+.letter-content p { margin-bottom: 12px; color: #cbd5e1; }
+.signature { font-weight: bold; color: #fbbf24; margin-top: 15px; }
 
-.letter-content p {
-  margin-bottom: 12px;
-  font-size: 0.95rem;
-  color: #cbd5e1;
-}
-
-.signature {
-  font-weight: bold;
-  color: #fbbf24;
-  margin-top: 15px;
-}
-/* SCENE 5: GALAXY & POLAROIDS */
+/* SCENE 5: GALAXY & 16:9 POLAROIDS WITH HIGH FLOATING */
 #scene-galaxy {
   background: #090d16;
   color: white;
+  position: relative;
+  overflow: hidden;
 }
 
 .stars-bg {
@@ -515,9 +461,7 @@ body, html {
   width: 100%;
   height: 100%;
   background: radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
-              radial-gradient(2px 2px at 40px 70px, #fbbf24, rgba(0,0,0,0)),
-              radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0));
-  background-repeat: repeat;
+              radial-gradient(2px 2px at 40px 70px, #fbbf24, rgba(0,0,0,0));
   background-size: 200px 200px;
   opacity: 0.6;
 }
@@ -543,37 +487,69 @@ body, html {
 
 .polaroid {
   position: absolute;
-  width: 120px;
+  width: 170px;
   background: white;
-  padding: 10px 10px 18px 10px;
+  padding: 10px 10px 16px 10px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-  border-radius: 6px;
+  border-radius: 8px;
   text-align: center;
   color: #333;
   cursor: pointer;
-  animation: floatRandom 6s infinite ease-in-out alternate;
 }
 
+/* 16:9 Ratio Setup for Images */
 .polaroid img {
   width: 100%;
-  height: 105px;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 4px;
+  display: block;
 }
 
 .polaroid span {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  margin-top: 6px;
+  margin-top: 8px;
   display: block;
   color: #1e293b;
 }
 
-.polaroid:nth-child(1) { top: 18%; left: 15%; animation-delay: 0s; }
-.polaroid:nth-child(2) { top: 25%; right: 15%; animation-delay: 1s; }
-.polaroid:nth-child(3) { top: 55%; left: 18%; animation-delay: 2s; }
-.polaroid:nth-child(4) { top: 60%; right: 22%; animation-delay: 1.5s; }
-.polaroid:nth-child(5) { top: 40%; left: 45%; animation-delay: 0.5s; }
+.polaroid:hover {
+  transform: scale(1.12) translateY(-10px) rotate(0deg) !important;
+  box-shadow: 0 25px 50px rgba(244, 63, 94, 0.5);
+  z-index: 50;
+}
+
+/* Heavy & High Floating Animations for 4 Photos */
+.p1 { top: 18%; left: 12%; animation: floatHeavy1 4s ease-in-out infinite alternate; }
+.p2 { top: 20%; right: 12%; animation: floatHeavy2 4.5s ease-in-out infinite alternate; }
+.p3 { bottom: 18%; left: 15%; animation: floatHeavy3 3.8s ease-in-out infinite alternate; }
+.p4 { bottom: 18%; right: 15%; animation: floatHeavy4 4.2s ease-in-out infinite alternate; }
+
+@keyframes floatHeavy1 {
+  0% { transform: translateY(0px) rotate(-6deg); }
+  100% { transform: translateY(-45px) rotate(-2deg); }
+}
+
+@keyframes floatHeavy2 {
+  0% { transform: translateY(0px) rotate(5deg); }
+  100% { transform: translateY(50px) rotate(9deg); }
+}
+
+@keyframes floatHeavy3 {
+  0% { transform: translateY(0px) rotate(4deg); }
+  100% { transform: translateY(-50px) rotate(-2deg); }
+}
+
+@keyframes floatHeavy4 {
+  0% { transform: translateY(0px) rotate(-5deg); }
+  100% { transform: translateY(45px) rotate(-1deg); }
+}
+
+@keyframes flicker {
+  0% { opacity: 0.8; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1.05); }
+}
 
 .photo-modal {
   position: fixed;
@@ -583,7 +559,7 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  z-index: 100;
 }
 
 .photo-modal.hidden { display: none; }
@@ -602,76 +578,4 @@ body, html {
   max-width: 100%;
   max-height: 60vh;
   border-radius: 6px;
-}
-
-@keyframes flicker {
-  0% { opacity: 0.8; transform: scale(0.95); }
-  100% { opacity: 1; transform: scale(1.05); }
-}
-
-@keyframes floatRandom {
-  0% { transform: translateY(0) rotate(-3deg); }
-  100% { transform: translateY(-15px) rotate(4deg); }
-}
-/* Unique Scattered Positions & High Floating Animations */
-.p1 { top: 12%; left: 8%; animation: floatHeavy1 4s ease-in-out infinite alternate; }
-.p2 { top: 15%; right: 10%; animation: floatHeavy2 4.5s ease-in-out infinite alternate; }
-.p3 { bottom: 15%; left: 12%; animation: floatHeavy3 3.8s ease-in-out infinite alternate; }
-.p4 { bottom: 12%; right: 15%; animation: floatHeavy4 4.2s ease-in-out infinite alternate; }
-.p5 { top: 40%; left: 32%; animation: floatHeavy5 5s ease-in-out infinite alternate; }
-.p6 { top: 38%; right: 30%; animation: floatHeavy6 4.6s ease-in-out infinite alternate; }
-
-@keyframes floatHeavy1 {
-  0% { transform: translateY(0px) rotate(-6deg); }
-  100% { transform: translateY(-40px) rotate(-2deg); }
-}
-
-@keyframes floatHeavy2 {
-  0% { transform: translateY(0px) rotate(5deg); }
-  100% { transform: translateY(45px) rotate(9deg); }
-}
-
-@keyframes floatHeavy3 {
-  0% { transform: translateY(0px) rotate(4deg); }
-  100% { transform: translateY(-45px) rotate(-2deg); }
-}
-
-@keyframes floatHeavy4 {
-  0% { transform: translateY(0px) rotate(-5deg); }
-  100% { transform: translateY(40px) rotate(-1deg); }
-}
-
-@keyframes floatHeavy5 {
-  0% { transform: translateY(0px) rotate(-2deg) scale(1); }
-  100% { transform: translateY(-35px) rotate(3deg) scale(1.03); }
-}
-
-@keyframes floatHeavy6 {
-  0% { transform: translateY(0px) rotate(3deg) scale(1); }
-  100% { transform: translateY(38px) rotate(-3deg) scale(1.03); }
-}
-/* Unique Scattered Positions & High Floating Animations for 4 Photos */
-.p1 { top: 15%; left: 12%; animation: floatHeavy1 4s ease-in-out infinite alternate; }
-.p2 { top: 18%; right: 12%; animation: floatHeavy2 4.5s ease-in-out infinite alternate; }
-.p3 { bottom: 15%; left: 15%; animation: floatHeavy3 3.8s ease-in-out infinite alternate; }
-.p4 { bottom: 15%; right: 15%; animation: floatHeavy4 4.2s ease-in-out infinite alternate; }
-
-@keyframes floatHeavy1 {
-  0% { transform: translateY(0px) rotate(-6deg); }
-  100% { transform: translateY(-40px) rotate(-2deg); }
-}
-
-@keyframes floatHeavy2 {
-  0% { transform: translateY(0px) rotate(5deg); }
-  100% { transform: translateY(45px) rotate(9deg); }
-}
-
-@keyframes floatHeavy3 {
-  0% { transform: translateY(0px) rotate(4deg); }
-  100% { transform: translateY(-45px) rotate(-2deg); }
-}
-
-@keyframes floatHeavy4 {
-  0% { transform: translateY(0px) rotate(-5deg); }
-  100% { transform: translateY(40px) rotate(-1deg); }
 }
