@@ -675,27 +675,3 @@ body, html {
   0% { transform: translateY(0px) rotate(-5deg); }
   100% { transform: translateY(40px) rotate(-1deg); }
 }
-
-.polaroid:hover {
-  transform: scale(1.12) translateY(-10px) rotate(0deg) !important;
-  box-shadow: 0 25px 50px rgba(244, 63, 94, 0.5);
-  border-color: rgba(244, 63, 94, 0.7);
-  z-index: 50;
-}
-
-.polaroid img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: 10px;
-  display: block;
-}
-
-.polaroid span {
-  display: block;
-  text-align: center;
-  margin-top: 8px;
-  font-weight: 600;
-  color: #f8fafc;
-  font-size: 0.9rem;
-}
