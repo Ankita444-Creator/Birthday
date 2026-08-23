@@ -1,3 +1,34 @@
+// AESTHETIC FALLING CONFETTI / PARTY PAPERS GENERATOR
+function createConfettiShower() {
+  const container = document.getElementById("confetti-container");
+  const colors = ["#f43f5e", "#fbbf24", "#8b5cf6", "#06b6d4", "#ec4899", "#34d399"];
+  
+  // Create multiple confetti pieces continuously
+  setInterval(() => {
+    if (document.hidden) return;
+    const piece = document.createElement("div");
+    piece.classList.add("confetti-piece");
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.width = Math.random() * 8 + 6 + "px";
+    piece.style.height = Math.random() * 14 + 10 + "px";
+    
+    const duration = Math.random() * 3 + 2;
+    piece.style.animationDuration = duration + "s";
+    
+    container.appendChild(piece);
+    
+    setTimeout(() => {
+      piece.remove();
+    }, duration * 1000);
+  }, 120);
+}
+
+// Initialize Confetti on load
+window.addEventListener("DOMContentLoaded", () => {
+  createConfettiShower();
+});
+
 // PASSCODE LOGIC
 const CORRECT_PASSCODE = "667070"; 
 let currentInput = "";
@@ -53,7 +84,7 @@ function goToScene(sceneId) {
   document.getElementById(sceneId).classList.add("active");
 }
 
-// STRING / FLAME INTERACTION (Video Reference: Click/Pull down to transform)
+// BALLOON PULL INTERACTION
 const stringWrapper = document.getElementById("string-wrapper");
 const interactiveElem = document.getElementById("interactive-element");
 const pullString = document.getElementById("pull-string");
@@ -62,7 +93,7 @@ let isPulling = false;
 let pullDistance = 0;
 
 if (stringWrapper) {
-  stringWrapper.addEventListener("mousedown", (e) => {
+  stringWrapper.addEventListener("mousedown", () => {
     isPulling = true;
   });
 
@@ -70,15 +101,14 @@ if (stringWrapper) {
     if (!isPulling) return;
     pullDistance += e.movementY;
     if (pullDistance > 0 && pullDistance < 100) {
-      pullString.style.height = (140 + pullDistance) + "px";
+      pullString.style.height = (130 + pullDistance) + "px";
     }
     if (pullDistance >= 80) {
       isPulling = false;
-      // Change bulb to Fire Symbol as shown in reference video
-      interactiveElem.innerHTML = "🔥";
+      interactiveElem.innerHTML = "✨🎉"; // Burst into confetti/sparkles
       setTimeout(() => {
         goToScene("scene-cake");
-      }, 600);
+      }, 500);
     }
   });
 
@@ -86,30 +116,30 @@ if (stringWrapper) {
     if (isPulling && pullDistance < 80) {
       isPulling = false;
       pullDistance = 0;
-      pullString.style.height = "140px";
+      pullString.style.height = "130px";
     }
   });
 
   // Touch Support for Mobile
   stringWrapper.addEventListener("touchstart", () => { isPulling = true; });
-  window.addEventListener("touchmove", (e) => {
+  window.addEventListener("touchmove", () => {
     if (!isPulling) return;
-    pullDistance += 10;
-    pullString.style.height = (140 + pullDistance) + "px";
+    pullDistance += 12;
+    pullString.style.height = (130 + pullDistance) + "px";
     if (pullDistance >= 80) {
       isPulling = false;
-      interactiveElem.innerHTML = "🔥";
-      setTimeout(() => { goToScene("scene-cake"); }, 600);
+      interactiveElem.innerHTML = "✨🎉";
+      setTimeout(() => { goToScene("scene-cake"); }, 500);
     }
   });
 }
 
-// CAKE CUTTING INTERACTION (Strictly Horizontal Drag Requirement)
+// CAKE CUTTING INTERACTION (Horizontal Drag/Swipe)
 const cakeBox = document.getElementById("cake-box");
 const swipeLine = document.getElementById("swipe-line");
 let isDraggingCake = false;
 let startX = 0;
-let boxWidth = 260;
+let boxWidth = 280;
 
 if (cakeBox) {
   cakeBox.addEventListener("mousedown", (e) => {
@@ -137,7 +167,6 @@ if (cakeBox) {
     }
   });
 
-  // Touch support for horizontal swipe
   cakeBox.addEventListener("touchstart", (e) => {
     isDraggingCake = true;
     startX = e.touches[0].clientX;
