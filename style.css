@@ -17,35 +17,110 @@ body, html {
   height: 100%;
   overflow: hidden;
   background: radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);
+  color: #fff;
 }
 
 .scene {
-  display: none;
-  width: 100vw;
-  height: 100vh;
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
+  display: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .scene.active {
   display: flex;
+  opacity: 1;
+  z-index: 5;
 }
 
-/* CONFETTI - TRIGGERED ONLY ON SUCCESSFUL POP */
+/* PASSCODE STYLING */
+.passcode-card {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 30px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  width: 340px;
+}
+
+.passcode-card h2 {
+  font-size: 1.8rem;
+  background: linear-gradient(to right, #f43f5e, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 5px;
+}
+
+.passcode-card p {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+}
+
+.passcode-display {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #fbbf24;
+  border-radius: 50%;
+  display: inline-block;
+  transition: 0.2s;
+}
+
+.dot.active {
+  background-color: #fbbf24;
+  box-shadow: 0 0 10px #fbbf24;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.keypad button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 14px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.keypad button:hover {
+  background: rgba(244, 63, 94, 0.2);
+  border-color: rgba(244, 63, 94, 0.5);
+  transform: scale(1.05);
+}
+
+.error-msg {
+  color: #f43f5e;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+/* CONTINUOUS CONFETTI */
 .confetti-container {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 99;
   overflow: hidden;
-  display: none;
-}
-
-.confetti-container.active {
   display: block;
 }
 
@@ -56,360 +131,15 @@ body, html {
   background: var(--primary-yellow);
   top: -20px;
   opacity: 0.9;
-  animation: fallConfetti linear forwards;
+  animation: fallConfetti linear infinite;
 }
 
 @keyframes fallConfetti {
-  0% {
-    transform: translateY(0) rotate(0deg) translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(105vh) rotate(720deg) translateX(60px);
-    opacity: 0.2;
-  }
+  0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg) translateX(60px); opacity: 0.2; }
 }
 
-/* SCENE 1: PASSCODE CARD */
-#scene-passcode {
-  background: radial-gradient(circle at top right, #3b0764, #1e1b4b, #0f172a);
-}
-
-.passcode-card {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 40px;
-  border-radius: 28px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  text-align: center;
-  max-width: 440px;
-  width: 90%;
-  color: #fff;
-}
-
-.passcode-card h2 {
-  font-weight: 600;
-  font-size: 1.8rem;
-  margin-bottom: 8px;
-  background: linear-gradient(to right, #f43f5e, #fbbf24);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.passcode-card p {
-  color: #cbd5e1;
-  font-size: 0.9rem;
-}
-
-.passcode-display {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 25px 0;
-}
-
-.dot {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 2px solid #fbbf24;
-  background: transparent;
-  transition: all 0.2s;
-}
-
-.dot.filled {
-  background: #fbbf24;
-  box-shadow: 0 0 10px #fbbf24;
-}
-
-.keypad {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 20px;
-}
-
-.keypad button {
-  padding: 16px;
-  font-size: 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.keypad button:active {
-  background: rgba(251, 191, 36, 0.3);
-  transform: scale(0.95);
-}
-
-.error-msg {
-  color: #f43f5e;
-  font-size: 0.85rem;
-  margin-top: 15px;
-  min-height: 18px;
-}
-
-/* SCENE 2: BIG BALLOON & STRING PULL */
-#scene-floral {
-  position: relative;
-  overflow: hidden;
-  background: radial-gradient(circle, #2e1065 0%, #0f172a 100%);
-}
-
-.aesthetic-bg-glow {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 30%, rgba(244, 63, 94, 0.25), transparent 60%);
-  z-index: 1;
-}
-
-.floral-overlay {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 45px;
-  border-radius: 24px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-}
-
-.string-wrapper {
-  position: relative;
-  height: 250px;
-  cursor: grab;
-  touch-action: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Big Realistic Balloon Styling */
-.big-balloon {
-  width: 70px;
-  height: 85px;
-  background: radial-gradient(circle at 30% 30%, #ff758c, #ff7eb3 40%, #c71585 100%);
-  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-  position: relative;
-  box-shadow: inset -6px -6px 15px rgba(0,0,0,0.3), 0 10px 20px rgba(244,63,94,0.4);
-  animation: floatBalloon 2s infinite alternate ease-in-out;
-}
-
-.balloon-gloss {
-  position: absolute;
-  top: 12px;
-  left: 15px;
-  width: 14px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
-  transform: rotate(-30deg);
-}
-
-/* Balloon Knot */
-.big-balloon::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 31px;
-  width: 8px;
-  height: 8px;
-  background: #c71585;
-  clip-path: polygon(50% 100%, 0 0, 100% 0);
-}
-
-@keyframes floatBalloon {
-  0% { transform: translateY(0) scale(1); }
-  100% { transform: translateY(-8px) scale(1.02); }
-}
-
-.string {
-  width: 2px;
-  height: 140px;
-  background: rgba(255, 255, 255, 0.6);
-  margin-top: -2px;
-  transition: height 0.1s;
-}
-
-.handle {
-  width: 16px;
-  height: 16px;
-  background: #fbbf24;
-  border-radius: 50%;
-  margin-top: -8px;
-  box-shadow: 0 0 10px #fbbf24;
-}
-
-.pull-text {
-  margin-top: 20px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
-
-/* SCENE 3: REALISTIC CAKE & CANDLE LIGHTING */
-#scene-cake {
-  background: radial-gradient(circle at bottom, #1e1b4b, #0f172a);
-  text-align: center;
-  color: white;
-}
-
-.cake-container h2 {
-  font-size: 1.8rem;
-  background: linear-gradient(to right, #f43f5e, #fbbf24);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 5px;
-}
-
-.cake-container p {
-  color: #94a3b8;
-  font-size: 0.95rem;
-}
-
-.cake-box {
-  position: relative;
-  width: 300px;
-  height: 260px;
-  margin: 30px auto;
-  cursor: ew-resize;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-}
-
-/* Realistic 3D/Shaded Cake Container */
-.realistic-cake {
-  width: 220px;
-  height: 170px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  position: relative;
-  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-}
-
-.candles-row {
-  display: flex;
-  gap: 28px;
-  margin-bottom: 6px;
-  z-index: 3;
-}
-
-.candle {
-  width: 10px;
-  height: 40px;
-  background: linear-gradient(90deg, #ff758c, #ff7eb3);
-  position: relative;
-  border-radius: 4px;
-  box-shadow: inset -2px 0 4px rgba(0,0,0,0.2);
-}
-
-.flame {
-  width: 12px;
-  height: 18px;
-  background: #fbbf24;
-  border-radius: 50% 50% 20% 20%;
-  position: absolute;
-  top: -18px;
-  left: -1px;
-  box-shadow: 0 0 12px #fbbf24, 0 0 20px #f59e0b;
-  opacity: 0; /* Initially unlit */
-  transform: scale(0);
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.flame.lit {
-  opacity: 1;
-  transform: scale(1);
-  animation: flicker 0.4s infinite alternate;
-}
-
-/* Dripping Chocolate Icing with Depth */
-.dripping-icing {
-  width: 205px;
-  height: 35px;
-  background: linear-gradient(135deg, #451a03, #270e01);
-  border-radius: 16px 16px 8px 8px;
-  position: relative;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-  z-index: 2;
-}
-
-.dripping-icing::after {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 15px;
-  width: 18px;
-  height: 18px;
-  background: #270e01;
-  border-radius: 0 0 10px 10px;
-  box-shadow: 45px 6px 0 #270e01, 95px 3px 0 #270e01, 140px 10px 0 #270e01;
-}
-
-.cake-layer {
-  width: 200px;
-  height: 45px;
-  background: linear-gradient(90deg, #78350f, #92400e, #78350f);
-  border-bottom: 3px solid #451a03;
-  border-radius: 4px;
-  z-index: 1;
-  box-shadow: inset 0 5px 10px rgba(0,0,0,0.3);
-}
-
-.cake-layer.layer-2 {
-  width: 215px;
-  height: 50px;
-  border-radius: 0 0 12px 12px;
-  background: linear-gradient(90deg, #451a03, #78350f, #451a03);
-}
-
-.swipe-line {
-  position: absolute;
-  height: 4px;
-  background: #f43f5e;
-  width: 0%;
-  top: 50%;
-  left: 0;
-  transition: width 0.1s;
-  box-shadow: 0 0 12px #f43f5e;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.btn {
-  padding: 12px 28px;
-  border: none;
-  background: linear-gradient(135deg, #f43f5e, #fbbf24);
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  border-radius: 30px;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
-  transition: transform 0.2s;
-  margin-top: 15px;
-}
-
-.btn:active {
-  transform: scale(0.95);
-}
-
-.btn.hidden { display: none; }
-
-/* SCENE 4: LETTER & ENVELOPE STYLING */
+/* SCENE 4: LETTER & ENVELOPE */
 #scene-letter {
   background: radial-gradient(circle, #3b0764 0%, #0f172a 100%);
 }
@@ -424,39 +154,42 @@ body, html {
   width: 100%;
 }
 
-/* Bigger & Balanced Title */
 .letter-title {
-  font-size: 2.2rem;
+  font-size: 2.1rem;
   font-weight: 600;
   margin-bottom: 35px;
   background: linear-gradient(to right, #f43f5e, #fbbf24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 0.5px;
-  text-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-/* Bigger & Premium Envelope Box */
+.heart-symbol {
+  -webkit-text-fill-color: initial;
+  display: inline-block;
+  font-size: 1.8rem;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.6));
+}
+
 .envelope {
-  width: 340px;
-  height: 210px;
+  width: 360px;
+  height: 220px;
   background: linear-gradient(135deg, #f43f5e, #be123c);
-  border-radius: 18px;
+  border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.45rem;
   cursor: pointer;
-  box-shadow: 0 20px 45px rgba(244, 63, 94, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+  box-shadow: 0 20px 45px rgba(244, 63, 94, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .envelope:hover {
   transform: scale(1.06);
-  box-shadow: 0 25px 55px rgba(244, 63, 94, 0.5);
 }
 
 .letter-modal {
@@ -504,112 +237,182 @@ body, html {
   color: #fbbf24;
   margin-top: 15px;
 }
-/* SCENE 5: GALAXY & POLAROIDS */
-#scene-galaxy {
-  background: #090d16;
+
+.btn {
+  background: linear-gradient(135deg, #f43f5e, #fbbf24);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
   color: white;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 10px 20px rgba(244, 63, 94, 0.3);
+  transition: 0.3s;
 }
 
-.stars-bg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
-              radial-gradient(2px 2px at 40px 70px, #fbbf24, rgba(0,0,0,0)),
-              radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0));
-  background-repeat: repeat;
-  background-size: 200px 200px;
-  opacity: 0.6;
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* SCENE 5: STARRY GALAXY GALLERY (HIGHLY FLOATING & SCATTERED CARDS) */
+#scene-galaxy {
+  background: radial-gradient(circle, #1e1b4b 0%, #030712 100%);
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
 }
 
 .galaxy-title {
-  position: absolute;
-  top: 30px;
   text-align: center;
-  z-index: 2;
+  padding-top: 25px;
+  z-index: 10;
+  position: relative;
 }
 
 .galaxy-title h2 {
+  font-size: 2.2rem;
   background: linear-gradient(to right, #f43f5e, #fbbf24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+.galaxy-title p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
 .floating-container {
   position: relative;
   width: 100%;
-  height: 80%;
+  height: calc(100vh - 100px);
+  max-width: 1200px;
+  margin: 0 auto;
+  z-index: 5;
 }
 
 .polaroid {
   position: absolute;
-  width: 120px;
-  background: white;
-  padding: 10px 10px 18px 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-  border-radius: 6px;
-  text-align: center;
-  color: #333;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 10px 15px 10px;
+  border-radius: 16px;
   cursor: pointer;
-  animation: floatRandom 6s infinite ease-in-out alternate;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  width: 240px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Unique Scattered Positions & High Floating Animations */
+.p1 { top: 12%; left: 8%; animation: floatHeavy1 5s ease-in-out infinite alternate; }
+.p2 { top: 15%; right: 10%; animation: floatHeavy2 6s ease-in-out infinite alternate; }
+.p3 { bottom: 15%; left: 12%; animation: floatHeavy3 5.5s ease-in-out infinite alternate; }
+.p4 { bottom: 12%; right: 15%; animation: floatHeavy4 4.8s ease-in-out infinite alternate; }
+.p5 { top: 40%; left: 32%; animation: floatHeavy5 6.5s ease-in-out infinite alternate; }
+.p6 { top: 38%; right: 30%; animation: floatHeavy6 5.2s ease-in-out infinite alternate; }
+
+@keyframes floatHeavy1 {
+  0% { transform: translateY(0px) rotate(-6deg); }
+  100% { transform: translateY(-25px) rotate(-2deg); }
+}
+
+@keyframes floatHeavy2 {
+  0% { transform: translateY(0px) rotate(5deg); }
+  100% { transform: translateY(30px) rotate(9deg); }
+}
+
+@keyframes floatHeavy3 {
+  0% { transform: translateY(0px) rotate(4deg); }
+  100% { transform: translateY(-28px) rotate(-2deg); }
+}
+
+@keyframes floatHeavy4 {
+  0% { transform: translateY(0px) rotate(-5deg); }
+  100% { transform: translateY(25px) rotate(-1deg); }
+}
+
+@keyframes floatHeavy5 {
+  0% { transform: translateY(0px) rotate(-2deg) scale(1); }
+  100% { transform: translateY(-22px) rotate(3deg) scale(1.03); }
+}
+
+@keyframes floatHeavy6 {
+  0% { transform: translateY(0px) rotate(3deg) scale(1); }
+  100% { transform: translateY(26px) rotate(-3deg) scale(1.03); }
+}
+
+.polaroid:hover {
+  transform: scale(1.12) translateY(-10px) rotate(0deg) !important;
+  box-shadow: 0 25px 50px rgba(244, 63, 94, 0.5);
+  border-color: rgba(244, 63, 94, 0.7);
+  z-index: 50;
 }
 
 .polaroid img {
   width: 100%;
-  height: 105px;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 10px;
+  display: block;
 }
 
 .polaroid span {
-  font-size: 0.75rem;
-  font-weight: 600;
-  margin-top: 6px;
   display: block;
-  color: #1e293b;
+  text-align: center;
+  margin-top: 8px;
+  font-weight: 600;
+  color: #f8fafc;
+  font-size: 0.9rem;
 }
 
-.polaroid:nth-child(1) { top: 18%; left: 15%; animation-delay: 0s; }
-.polaroid:nth-child(2) { top: 25%; right: 15%; animation-delay: 1s; }
-.polaroid:nth-child(3) { top: 55%; left: 18%; animation-delay: 2s; }
-.polaroid:nth-child(4) { top: 60%; right: 22%; animation-delay: 1.5s; }
-.polaroid:nth-child(5) { top: 40%; left: 45%; animation-delay: 0.5s; }
-
+/* Modal Popup */
 .photo-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(12px);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  z-index: 100;
+  padding: 20px;
 }
 
 .photo-modal.hidden { display: none; }
 
 .modal-card {
-  background: white;
-  padding: 15px 15px 22px 15px;
-  border-radius: 12px;
-  max-width: 85%;
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 20px;
+  max-width: 650px;
+  width: 100%;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
   text-align: center;
-  color: #333;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
 .modal-card img {
-  max-width: 100%;
-  max-height: 60vh;
-  border-radius: 6px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
 }
 
-@keyframes flicker {
-  0% { opacity: 0.8; transform: scale(0.95); }
-  100% { opacity: 1; transform: scale(1.05); }
+.modal-card p {
+  color: #fbbf24;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-@keyframes floatRandom {
-  0% { transform: translateY(0) rotate(-3deg); }
-  100% { transform: translateY(-15px) rotate(4deg); }
+/* Responsive for mobile screens */
+@media (max-width: 768px) {
+  .polaroid { width: 180px; padding: 8px 8px 12px 8px; }
+  .p1 { top: 10%; left: 5%; }
+  .p2 { top: 12%; right: 5%; }
+  .p3 { bottom: 10%; left: 5%; }
+  .p4 { bottom: 12%; right: 5%; }
+  .p5 { top: 40%; left: 3%; }
+  .p6 { top: 42%; right: 3%; }
 }
