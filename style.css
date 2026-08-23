@@ -1,0 +1,378 @@
+:root {
+  --yellow-main: #f59e0b;
+  --yellow-light: #fef3c7;
+  --yellow-glow: #fde68a;
+  --bg-dark: #0f172a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #fefce8;
+}
+
+.scene {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.scene.active {
+  display: flex;
+}
+
+/* SCENE 1: PASSCODE */
+#scene-passcode {
+  background: linear-gradient(135deg, #fef3c7, #fde68a, #fef08a);
+}
+
+.passcode-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(217, 119, 6, 0.2);
+  text-align: center;
+  max-width: 320px;
+  width: 90%;
+}
+
+.passcode-display {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #d97706;
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.dot.filled {
+  background: #d97706;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.keypad button {
+  padding: 12px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #78350f;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.keypad button:active {
+  background: #fde68a;
+}
+
+.error-msg {
+  color: #dc2626;
+  font-size: 0.85rem;
+  margin-top: 10px;
+  min-height: 18px;
+}
+
+/* SCENE 2: YELLOW ROSE FLORAL & STRING */
+#scene-floral {
+  background: radial-gradient(circle, #fef08a, #ca8a04);
+}
+
+.floral-overlay {
+  text-align: center;
+  color: #78350f;
+}
+
+.string-wrapper {
+  position: relative;
+  height: 200px;
+  cursor: pointer;
+}
+
+.hanging-bulb {
+  font-size: 2.5rem;
+  animation: float 2s infinite ease-in-out;
+}
+
+.string {
+  width: 3px;
+  height: 120px;
+  background: #78350f;
+  margin: 0 auto;
+}
+
+.handle {
+  width: 16px;
+  height: 16px;
+  background: #d97706;
+  border-radius: 50%;
+  margin: -8px auto 0 auto;
+}
+
+.pull-text {
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+/* SCENE 3: CAKE CUTTING */
+#scene-cake {
+  background: #fefce8;
+  text-align: center;
+}
+
+.cake-box {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 30px auto;
+  cursor: crosshair;
+}
+
+.pixel-cake {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.candle {
+  width: 12px;
+  height: 35px;
+  background: #f59e0b;
+  position: relative;
+}
+
+.flame {
+  width: 10px;
+  height: 14px;
+  background: #ef4444;
+  border-radius: 50% 50% 20% 20%;
+  position: absolute;
+  top: -14px;
+  left: 1px;
+  animation: flicker 0.5s infinite alternate;
+}
+
+.icing {
+  width: 140px;
+  height: 20px;
+  background: #fef08a;
+  border-radius: 10px 10px 0 0;
+}
+
+.cake-layer {
+  width: 160px;
+  height: 40px;
+  background: #ca8a04;
+  border-bottom: 4px solid #78350f;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  background: #d97706;
+  color: white;
+  font-size: 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3);
+}
+
+.btn.hidden { display: none; }
+
+/* SCENE 4: LETTER */
+#scene-letter {
+  background: #fef3c7;
+}
+
+.envelope {
+  width: 220px;
+  height: 140px;
+  background: #d97706;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.letter-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.letter-modal.hidden { display: none; }
+
+.letter-content {
+  background: #fffbeb;
+  padding: 25px;
+  border-radius: 15px;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 2px solid #fde68a;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  color: #451a03;
+  line-height: 1.6;
+}
+
+.letter-content h3 {
+  color: #b45309;
+  margin-bottom: 12px;
+}
+
+.letter-content p {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.signature {
+  font-weight: bold;
+  color: #b45309;
+}
+
+/* SCENE 5: GALAXY & FLOATING POLAROIDS */
+#scene-galaxy {
+  background: #090d16;
+  color: white;
+}
+
+.stars-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
+              radial-gradient(2px 2px at 40px 70px, #fde68a, rgba(0,0,0,0)),
+              radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  opacity: 0.6;
+}
+
+.galaxy-title {
+  position: absolute;
+  top: 20px;
+  text-align: center;
+  z-index: 2;
+}
+
+.floating-container {
+  position: relative;
+  width: 100%;
+  height: 80%;
+}
+
+.polaroid {
+  position: absolute;
+  width: 110px;
+  background: white;
+  padding: 8px 8px 15px 8px;
+  box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+  border-radius: 4px;
+  text-align: center;
+  color: #333;
+  cursor: pointer;
+  animation: floatRandom 6s infinite ease-in-out alternate;
+}
+
+.polaroid img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.polaroid span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 5px;
+  display: block;
+}
+
+/* Position floating frames */
+.polaroid:nth-child(1) { top: 15%; left: 15%; animation-delay: 0s; }
+.polaroid:nth-child(2) { top: 25%; right: 15%; animation-delay: 1s; }
+.polaroid:nth-child(3) { top: 55%; left: 20%; animation-delay: 2s; }
+.polaroid:nth-child(4) { top: 60%; right: 25%; animation-delay: 1.5s; }
+.polaroid:nth-child(5) { top: 40%; left: 45%; animation-delay: 0.5s; }
+
+.photo-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.photo-modal.hidden { display: none; }
+
+.modal-card {
+  background: white;
+  padding: 12px 12px 20px 12px;
+  border-radius: 8px;
+  max-width: 85%;
+  text-align: center;
+  color: #333;
+}
+
+.modal-card img {
+  max-width: 100%;
+  max-height: 60vh;
+  border-radius: 4px;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes flicker {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes floatRandom {
+  0% { transform: translateY(0) rotate(-3deg); }
+  100% { transform: translateY(-15px) rotate(4deg); }
+}
