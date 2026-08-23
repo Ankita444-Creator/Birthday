@@ -74,7 +74,7 @@ body, html {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 40px;
+  padding: 30px;
   border-radius: 28px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   text-align: center;
@@ -85,7 +85,7 @@ body, html {
 
 .passcode-card h2 {
   font-weight: 600;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   margin-bottom: 8px;
   background: linear-gradient(to right, #f43f5e, #fbbf24);
   -webkit-background-clip: text;
@@ -94,19 +94,19 @@ body, html {
 
 .passcode-card p {
   color: #cbd5e1;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .passcode-display {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin: 25px 0;
+  margin: 20px 0;
 }
 
 .dot {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   border: 2px solid #fbbf24;
   background: transparent;
@@ -121,15 +121,15 @@ body, html {
 .keypad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 15px;
 }
 
 .keypad button {
-  padding: 16px;
-  font-size: 1.2rem;
+  padding: 14px;
+  font-size: 1.1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  border-radius: 14px;
   background: rgba(255, 255, 255, 0.05);
   color: #fff;
   cursor: pointer;
@@ -143,9 +143,9 @@ body, html {
 
 .error-msg {
   color: #f43f5e;
-  font-size: 0.85rem;
-  margin-top: 15px;
-  min-height: 18px;
+  font-size: 0.8rem;
+  margin-top: 10px;
+  min-height: 16px;
 }
 
 /* SCENE 2: BIG BALLOON */
@@ -170,14 +170,16 @@ body, html {
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 45px;
+  padding: 35px 20px;
   border-radius: 24px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  width: 90%;
+  max-width: 400px;
 }
 
 .string-wrapper {
   position: relative;
-  height: 250px;
+  height: 220px;
   cursor: grab;
   touch-action: none;
   display: flex;
@@ -186,8 +188,8 @@ body, html {
 }
 
 .big-balloon {
-  width: 70px;
-  height: 85px;
+  width: 65px;
+  height: 80px;
   background: radial-gradient(circle at 30% 30%, #ff758c, #ff7eb3 40%, #c71585 100%);
   border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
   position: relative;
@@ -197,10 +199,10 @@ body, html {
 
 .balloon-gloss {
   position: absolute;
-  top: 12px;
-  left: 15px;
-  width: 14px;
-  height: 8px;
+  top: 10px;
+  left: 12px;
+  width: 12px;
+  height: 7px;
   background: rgba(255, 255, 255, 0.6);
   border-radius: 50%;
   transform: rotate(-30deg);
@@ -210,7 +212,7 @@ body, html {
   content: '';
   position: absolute;
   bottom: -6px;
-  left: 31px;
+  left: 28px;
   width: 8px;
   height: 8px;
   background: #c71585;
@@ -224,7 +226,7 @@ body, html {
 
 .string {
   width: 2px;
-  height: 140px;
+  height: 120px;
   background: rgba(255, 255, 255, 0.6);
   margin-top: -2px;
   transition: height 0.1s;
@@ -240,9 +242,9 @@ body, html {
 }
 
 .pull-text {
-  margin-top: 20px;
+  margin-top: 15px;
+  font-size: 0.9rem;
   font-weight: 500;
-  letter-spacing: 0.5px;
 }
 
 /* SCENE 3: CAKE */
@@ -253,7 +255,7 @@ body, html {
 }
 
 .cake-container h2 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   background: linear-gradient(to right, #f43f5e, #fbbf24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -262,14 +264,14 @@ body, html {
 
 .cake-container p {
   color: #94a3b8;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
 .cake-box {
   position: relative;
-  width: 300px;
-  height: 260px;
-  margin: 30px auto;
+  width: 280px;
+  height: 240px;
+  margin: 20px auto;
   cursor: ew-resize;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -281,8 +283,8 @@ body, html {
 }
 
 .realistic-cake {
-  width: 220px;
-  height: 170px;
+  width: 200px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -293,28 +295,28 @@ body, html {
 
 .candles-row {
   display: flex;
-  gap: 28px;
+  gap: 24px;
   margin-bottom: 6px;
   z-index: 3;
 }
 
 .candle {
-  width: 10px;
-  height: 40px;
+  width: 8px;
+  height: 35px;
   background: linear-gradient(90deg, #ff758c, #ff7eb3);
   position: relative;
   border-radius: 4px;
 }
 
 .flame {
-  width: 12px;
-  height: 18px;
+  width: 10px;
+  height: 15px;
   background: #fbbf24;
   border-radius: 50% 50% 20% 20%;
   position: absolute;
-  top: -18px;
+  top: -15px;
   left: -1px;
-  box-shadow: 0 0 12px #fbbf24, 0 0 20px #f59e0b;
+  box-shadow: 0 0 10px #fbbf24, 0 0 18px #f59e0b;
   opacity: 0;
   transform: scale(0);
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -327,17 +329,17 @@ body, html {
 }
 
 .dripping-icing {
-  width: 205px;
-  height: 35px;
+  width: 185px;
+  height: 30px;
   background: linear-gradient(135deg, #451a03, #270e01);
-  border-radius: 16px 16px 8px 8px;
+  border-radius: 14px 14px 6px 6px;
   position: relative;
   z-index: 2;
 }
 
 .cake-layer {
-  width: 200px;
-  height: 45px;
+  width: 180px;
+  height: 40px;
   background: linear-gradient(90deg, #78350f, #92400e, #78350f);
   border-bottom: 3px solid #451a03;
   border-radius: 4px;
@@ -345,9 +347,9 @@ body, html {
 }
 
 .cake-layer.layer-2 {
-  width: 215px;
-  height: 50px;
-  border-radius: 0 0 12px 12px;
+  width: 195px;
+  height: 45px;
+  border-radius: 0 0 10px 10px;
   background: linear-gradient(90deg, #451a03, #78350f, #451a03);
 }
 
@@ -364,16 +366,16 @@ body, html {
 }
 
 .btn {
-  padding: 12px 28px;
+  padding: 10px 24px;
   border: none;
   background: linear-gradient(135deg, #f43f5e, #fbbf24);
   color: white;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
   border-radius: 30px;
   cursor: pointer;
   box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .btn.hidden { display: none; }
@@ -394,27 +396,27 @@ body, html {
 }
 
 .letter-title {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 600;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
   background: linear-gradient(to right, #f43f5e, #fbbf24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .envelope {
-  width: 340px;
-  height: 210px;
+  width: 300px;
+  height: 180px;
   background: linear-gradient(135deg, #f43f5e, #be123c);
-  border-radius: 18px;
+  border-radius: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  box-shadow: 0 20px 45px rgba(244, 63, 94, 0.35);
+  box-shadow: 0 15px 35px rgba(244, 63, 94, 0.35);
 }
 
 .letter-modal {
@@ -425,7 +427,7 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 15px;
   z-index: 10;
 }
 
@@ -434,30 +436,32 @@ body, html {
 .letter-content {
   background: rgba(30, 41, 59, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 35px;
-  border-radius: 24px;
-  max-width: 520px;
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 480px;
   max-height: 80vh;
   overflow-y: auto;
   color: #f8fafc;
-  line-height: 1.7;
+  line-height: 1.6;
   text-align: left;
 }
 
-.letter-content h3 { color: #fbbf24; margin-bottom: 15px; }
-.letter-content p { margin-bottom: 12px; color: #cbd5e1; }
-.signature { font-weight: bold; color: #fbbf24; margin-top: 15px; }
-/* SCENE 5: MAGICAL GALAXY & TIGHTLY ARRANGED POLAROIDS */
+.letter-content h3 { color: #fbbf24; margin-bottom: 12px; font-size: 1.2rem; }
+.letter-content p { margin-bottom: 10px; color: #cbd5e1; font-size: 0.9rem; }
+.signature { font-weight: bold; color: #fbbf24; margin-top: 12px; }
+
+/* ========================================================
+   SCENE 5: MAGICAL GALAXY & RESPONSIVE POLAROIDS
+   ======================================================== */
 #scene-galaxy {
   background: radial-gradient(circle at center, #0a0e1a 0%, #030508 100%);
   color: white;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto; /* মোবাইলে স্ক্রল করার সুবিধা যাতে গিনজি না হয় */
   width: 100vw;
   height: 100vh;
 }
 
-/* Larger, brighter and glowing stars */
 .stars-bg {
   position: absolute;
   width: 100%;
@@ -484,49 +488,47 @@ body, html {
 }
 
 .galaxy-title {
-  position: absolute;
-  top: 25px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  margin-top: 20px;
   text-align: center;
   z-index: 10;
   width: 100%;
 }
 
 .galaxy-title h2 {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   background: linear-gradient(to right, #f43f5e, #fbbf24, #06b6d4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 18px rgba(244,63,94,0.5));
+  filter: drop-shadow(0 0 15px rgba(244,63,94,0.5));
 }
 
-/* Extra box/icon remove korar jonno fixed */
 .galaxy-title span {
   display: none !important;
 }
 
 .galaxy-title p {
   color: #94a3b8;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   margin-top: 2px;
 }
 
 .floating-container {
-  position: absolute;
-  inset: 0;
+  position: relative;
   width: 100%;
-  height: 100%;
+  max-width: 1100px;
+  height: calc(100vh - 100px);
+  margin: 0 auto;
 }
 
-/* Polaroids setup */
+/* Polaroid base styling */
 .polaroid {
   position: absolute;
-  width: 260px;
+  width: 240px;
   background: white;
-  padding: 12px 12px 18px 12px;
-  box-shadow: 0 20px 45px rgba(0,0,0,0.65), 0 0 30px rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
+  padding: 10px 10px 16px 10px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.65);
+  border-radius: 10px;
   text-align: center;
   color: #333;
   cursor: pointer;
@@ -543,43 +545,61 @@ body, html {
 }
 
 .polaroid span {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  margin-top: 8px;
+  margin-top: 6px;
   display: block;
   color: #1e293b;
 }
 
-.polaroid:hover {
-  transform: scale(1.12) translateY(-8px) rotate(0deg) !important;
-  box-shadow: 0 30px 60px rgba(244, 63, 94, 0.7), 0 0 35px rgba(251, 191, 36, 0.5);
-  z-index: 50;
+/* --- LAPTOP / LARGE SCREEN ARRANGEMENT --- */
+@media (min-width: 768px) {
+  .p1 { top: 15%; left: 18%; animation: floatTight1 4s ease-in-out infinite alternate; }
+  .p2 { top: 15%; right: 18%; animation: floatTight2 4.5s ease-in-out infinite alternate; }
+  .p3 { bottom: 10%; left: 20%; animation: floatTight3 4.2s ease-in-out infinite alternate; }
+  .p4 { bottom: 10%; right: 20%; animation: floatTight4 4.8s ease-in-out infinite alternate; }
 }
 
-/* Majhkhane faka jaiga kom korar jonno inward & compact arrangement */
-.p1 { top: 22%; left: 24%; animation: floatTight1 4s ease-in-out infinite alternate; }
-.p2 { top: 22%; right: 24%; animation: floatTight2 4.5s ease-in-out infinite alternate; }
-.p3 { bottom: 14%; left: 26%; animation: floatTight3 4.2s ease-in-out infinite alternate; }
-.p4 { bottom: 14%; right: 26%; animation: floatTight4 4.8s ease-in-out infinite alternate; }
+@keyframes floatTight1 { 0% { transform: translateY(0px) rotate(-4deg); } 100% { transform: translateY(-12px) rotate(-1deg); } }
+@keyframes floatTight2 { 0% { transform: translateY(0px) rotate(4deg); } 100% { transform: translateY(12px) rotate(1deg); } }
+@keyframes floatTight3 { 0% { transform: translateY(0px) rotate(3deg); } 100% { transform: translateY(-12px) rotate(-2deg); } }
+@keyframes floatTight4 { 0% { transform: translateY(0px) rotate(-3deg); } 100% { transform: translateY(12px) rotate(2deg); } }
 
-@keyframes floatTight1 {
-  0% { transform: translateY(0px) rotate(-4deg); }
-  100% { transform: translateY(-15px) rotate(-1deg); }
-}
+/* --- MOBILE SCREEN (PH) RESPONSIVE FIX (NO OVERLAPPING) --- */
+@media (max-width: 767px) {
+  #scene-galaxy {
+    overflow-y: auto !important;
+    height: 100vh;
+    padding-bottom: 40px;
+  }
+  
+  .floating-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    height: auto;
+    margin-top: 15px;
+    padding-bottom: 30px;
+  }
 
-@keyframes floatTight2 {
-  0% { transform: translateY(0px) rotate(4deg); }
-  100% { transform: translateY(15px) rotate(1deg); }
-}
-
-@keyframes floatTight3 {
-  0% { transform: translateY(0px) rotate(3deg); }
-  100% { transform: translateY(-15px) rotate(-2deg); }
-}
-
-@keyframes floatTight4 {
-  0% { transform: translateY(0px) rotate(-3deg); }
-  100% { transform: translateY(15px) rotate(2deg); }
+  .polaroid {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 82% !important;
+    max-width: 260px;
+    transform: none !important;
+    animation: none !important;
+    margin-bottom: 5px;
+  }
+  
+  .polaroid:hover {
+    transform: scale(1.03) !important;
+  }
 }
 
 .photo-modal {
@@ -591,15 +611,16 @@ body, html {
   justify-content: center;
   align-items: center;
   z-index: 100;
+  padding: 15px;
 }
 
 .photo-modal.hidden { display: none; }
 
 .modal-card {
   background: white;
-  padding: 15px 15px 22px 15px;
+  padding: 12px 12px 18px 12px;
   border-radius: 12px;
-  max-width: 85%;
+  max-width: 90%;
   text-align: center;
   color: #333;
   box-shadow: 0 20px 40px rgba(0,0,0,0.5);
@@ -607,6 +628,6 @@ body, html {
 
 .modal-card img {
   max-width: 100%;
-  max-height: 60vh;
+  max-height: 55vh;
   border-radius: 6px;
 }
