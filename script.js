@@ -1,11 +1,12 @@
-// AESTHETIC FALLING CONFETTI / PARTY PAPERS GENERATOR
-function createConfettiShower() {
+// FUNCTION TO LAUNCH CONFETTI ONLY WHEN SUCCESSFUL
+function triggerConfettiShower() {
   const container = document.getElementById("confetti-container");
+  container.classList.add("active");
+  container.innerHTML = "";
+  
   const colors = ["#f43f5e", "#fbbf24", "#8b5cf6", "#06b6d4", "#ec4899", "#34d399"];
   
-  // Create multiple confetti pieces continuously
-  setInterval(() => {
-    if (document.hidden) return;
+  for (let i = 0; i < 70; i++) {
     const piece = document.createElement("div");
     piece.classList.add("confetti-piece");
     piece.style.left = Math.random() * 100 + "vw";
@@ -13,21 +14,13 @@ function createConfettiShower() {
     piece.style.width = Math.random() * 8 + 6 + "px";
     piece.style.height = Math.random() * 14 + 10 + "px";
     
-    const duration = Math.random() * 3 + 2;
+    const duration = Math.random() * 2 + 2;
     piece.style.animationDuration = duration + "s";
+    piece.style.animationDelay = Math.random() * 0.5 + "s";
     
     container.appendChild(piece);
-    
-    setTimeout(() => {
-      piece.remove();
-    }, duration * 1000);
-  }, 120);
+  }
 }
-
-// Initialize Confetti on load
-window.addEventListener("DOMContentLoaded", () => {
-  createConfettiShower();
-});
 
 // PASSCODE LOGIC
 const CORRECT_PASSCODE = "667070"; 
@@ -82,9 +75,27 @@ function goToScene(sceneId) {
     scene.classList.remove("active");
   });
   document.getElementById(sceneId).classList.add("active");
+
+  // If entering cake scene, trigger sequential candle lighting
+  if (sceneId === 'scene-cake') {
+    lightCandlesSequentially();
+  }
 }
 
-// BALLOON PULL INTERACTION
+// SEQUENTIAL CANDLE LIGHTING ANIMATION
+function lightCandlesSequentially() {
+  setTimeout(() => {
+    document.querySelector("#candle-1 .flame").classList.add("lit");
+  }, 400);
+  setTimeout(() => {
+    document.querySelector("#candle-2 .flame").classList.add("lit");
+  }, 900);
+  setTimeout(() => {
+    document.querySelector("#candle-3 .flame").classList.add("lit");
+  }, 1400);
+}
+
+// BIG BALLOON STRING PULL & POP INTERACTION
 const stringWrapper = document.getElementById("string-wrapper");
 const interactiveElem = document.getElementById("interactive-element");
 const pullString = document.getElementById("pull-string");
@@ -100,38 +111,48 @@ if (stringWrapper) {
   window.addEventListener("mousemove", (e) => {
     if (!isPulling) return;
     pullDistance += e.movementY;
-    if (pullDistance > 0 && pullDistance < 100) {
-      pullString.style.height = (130 + pullDistance) + "px";
+    if (pullDistance > 0 && pullDistance < 120) {
+      pullString.style.height = (140 + pullDistance) + "px";
     }
-    if (pullDistance >= 80) {
+    if (pullDistance >= 100) {
       isPulling = false;
-      interactiveElem.innerHTML = "✨🎉"; // Burst into confetti/sparkles
-      setTimeout(() => {
-        goToScene("scene-cake");
-      }, 500);
+      popBalloonAndProceed();
     }
   });
 
   window.addEventListener("mouseup", () => {
-    if (isPulling && pullDistance < 80) {
+    if (isPulling && pullDistance < 100) {
       isPulling = false;
       pullDistance = 0;
-      pullString.style.height = "130px";
+      pullString.style.height = "140px";
     }
   });
 
   // Touch Support for Mobile
   stringWrapper.addEventListener("touchstart", () => { isPulling = true; });
-  window.addEventListener("touchmove", () => {
+  window.addEventListener("touchmove", (e) => {
     if (!isPulling) return;
     pullDistance += 12;
-    pullString.style.height = (130 + pullDistance) + "px";
-    if (pullDistance >= 80) {
+    pullString.style.height = (140 + pullDistance) + "px";
+    if (pullDistance >= 100) {
       isPulling = false;
-      interactiveElem.innerHTML = "✨🎉";
-      setTimeout(() => { goToScene("scene-cake"); }, 500);
+      popBalloonAndProceed();
     }
   });
+}
+
+function popBalloonAndProceed() {
+  // Balloon pop burst effect
+  interactiveElem.style.transform = "scale(1.4)";
+  interactiveElem.style.opacity = "0";
+  interactiveElem.style.transition = "all 0.2s ease-out";
+  
+  // Trigger Confetti ONLY here on success!
+  triggerConfettiShower();
+
+  setTimeout(() => {
+    goToScene("scene-cake");
+  }, 700);
 }
 
 // CAKE CUTTING INTERACTION (Horizontal Drag/Swipe)
@@ -139,7 +160,7 @@ const cakeBox = document.getElementById("cake-box");
 const swipeLine = document.getElementById("swipe-line");
 let isDraggingCake = false;
 let startX = 0;
-let boxWidth = 280;
+let boxWidth = 300;
 
 if (cakeBox) {
   cakeBox.addEventListener("mousedown", (e) => {
