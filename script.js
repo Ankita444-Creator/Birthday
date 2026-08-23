@@ -1,5 +1,5 @@
 // PASSCODE LOGIC
-const CORRECT_PASSCODE = "667070"; // B F F ascii sequence
+const CORRECT_PASSCODE = "667070"; 
 let currentInput = "";
 
 function pressKey(num) {
@@ -36,10 +36,8 @@ function updateDots() {
 
 function checkPasscode() {
   if (currentInput === CORRECT_PASSCODE) {
-    // Play audio
     const music = document.getElementById("bg-music");
     music.play().catch(e => console.log("Audio play deferred"));
-    
     goToScene("scene-floral");
   } else {
     document.getElementById("error-msg").innerText = "Wrong passcode! Try again.";
@@ -55,33 +53,107 @@ function goToScene(sceneId) {
   document.getElementById(sceneId).classList.add("active");
 }
 
-// STRING PULL TRANSITION
+// STRING / FLAME INTERACTION (Video Reference: Click/Pull down to transform)
 const stringWrapper = document.getElementById("string-wrapper");
+const interactiveElem = document.getElementById("interactive-element");
+const pullString = document.getElementById("pull-string");
+
+let isPulling = false;
+let pullDistance = 0;
+
 if (stringWrapper) {
-  stringWrapper.addEventListener("click", () => {
-    goToScene("scene-cake");
+  stringWrapper.addEventListener("mousedown", (e) => {
+    isPulling = true;
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (!isPulling) return;
+    pullDistance += e.movementY;
+    if (pullDistance > 0 && pullDistance < 100) {
+      pullString.style.height = (140 + pullDistance) + "px";
+    }
+    if (pullDistance >= 80) {
+      isPulling = false;
+      // Change bulb to Fire Symbol as shown in reference video
+      interactiveElem.innerHTML = "🔥";
+      setTimeout(() => {
+        goToScene("scene-cake");
+      }, 600);
+    }
+  });
+
+  window.addEventListener("mouseup", () => {
+    if (isPulling && pullDistance < 80) {
+      isPulling = false;
+      pullDistance = 0;
+      pullString.style.height = "140px";
+    }
+  });
+
+  // Touch Support for Mobile
+  stringWrapper.addEventListener("touchstart", () => { isPulling = true; });
+  window.addEventListener("touchmove", (e) => {
+    if (!isPulling) return;
+    pullDistance += 10;
+    pullString.style.height = (140 + pullDistance) + "px";
+    if (pullDistance >= 80) {
+      isPulling = false;
+      interactiveElem.innerHTML = "🔥";
+      setTimeout(() => { goToScene("scene-cake"); }, 600);
+    }
   });
 }
 
-// CAKE CUTTING INTERACTION
+// CAKE CUTTING INTERACTION (Strictly Horizontal Drag Requirement)
 const cakeBox = document.getElementById("cake-box");
-if (cakeBox) {
-  let isSwiping = false;
+const swipeLine = document.getElementById("swipe-line");
+let isDraggingCake = false;
+let startX = 0;
+let boxWidth = 260;
 
-  cakeBox.addEventListener("mousedown", () => isSwiping = true);
-  cakeBox.addEventListener("mouseup", () => {
-    if (isSwiping) {
-      document.getElementById("next-to-letter").classList.remove("hidden");
-    }
-    isSwiping = false;
+if (cakeBox) {
+  cakeBox.addEventListener("mousedown", (e) => {
+    isDraggingCake = true;
+    startX = e.clientX;
   });
 
-  cakeBox.addEventListener("touchstart", () => isSwiping = true);
-  cakeBox.addEventListener("touchend", () => {
-    if (isSwiping) {
-      document.getElementById("next-to-letter").classList.remove("hidden");
+  window.addEventListener("mousemove", (e) => {
+    if (!isDraggingCake) return;
+    let diffX = e.clientX - startX;
+    if (diffX > 0) {
+      let progress = Math.min((diffX / boxWidth) * 100, 100);
+      swipeLine.style.width = progress + "%";
+      if (progress >= 90) {
+        isDraggingCake = false;
+        document.getElementById("next-to-letter").classList.remove("hidden");
+      }
     }
-    isSwiping = false;
+  });
+
+  window.addEventListener("mouseup", () => {
+    if (isDraggingCake) {
+      isDraggingCake = false;
+      swipeLine.style.width = "0%";
+    }
+  });
+
+  // Touch support for horizontal swipe
+  cakeBox.addEventListener("touchstart", (e) => {
+    isDraggingCake = true;
+    startX = e.touches[0].clientX;
+  });
+
+  window.addEventListener("touchmove", (e) => {
+    if (!isDraggingCake) return;
+    let diffX = e.touches[0].clientX - startX;
+    if (diffX > 0) {
+      let progress = Math.min((diffX / boxWidth) * 100, 100);
+      swipeLine.style.width = progress + "%";
+      if (progress >= 90) {
+        isDraggingCake = false;
+        document.getElementById("next-to-letter").classList.remove("hidden");
+      }
+    }
   });
 }
 
