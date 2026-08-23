@@ -14,7 +14,7 @@
     <source src="assets/song.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Floating Confetti & Party Papers Container -->
+  <!-- Confetti Container (Triggered only on successful balloon pop) -->
   <div class="confetti-container" id="confetti-container"></div>
 
   <!-- SCENE 1: PASSCODE ENTRY -->
@@ -51,36 +51,47 @@
     </div>
   </div>
 
-  <!-- SCENE 2: BALLOONS & PULL STRING TRANSITION -->
+  <!-- SCENE 2: BIG BALLOON & STRING PULL -->
   <div id="scene-floral" class="scene">
     <div class="aesthetic-bg-glow"></div>
     <div class="floral-overlay">
       <div class="string-wrapper" id="string-wrapper">
-        <div id="interactive-element" class="hanging-balloon">🎈</div>
+        <!-- Big Realistic Balloon -->
+        <div id="interactive-element" class="big-balloon">
+          <div class="balloon-gloss"></div>
+        </div>
         <div class="string" id="pull-string"></div>
         <div class="handle"></div>
       </div>
-      <p class="pull-text">Drag or pull the string down to pop the party! ✨</p>
+      <p class="pull-text">Drag or pull the string down to pop the balloon! ✨</p>
     </div>
   </div>
 
-  <!-- SCENE 3: AESTHETIC DRIPPING CAKE CUTTING -->
+  <!-- SCENE 3: REALISTIC CAKE & SEQUENTIAL CANDLE LIGHTING -->
   <div id="scene-cake" class="scene">
     <div class="cake-container">
-      <h2>Swipe to Cut the Cake! 🎂</h2>
-      <p>Drag horizontally across the cake to slice</p>
+      <h2>Make a Wish & Cut the Cake! 🎂</h2>
+      <p>Wait for candles to light up, then swipe across the cake</p>
 
       <div class="cake-box" id="cake-box">
-        <div class="pixel-cake">
+        <div class="realistic-cake">
+          <!-- 3 Candles with Sequential Lighting -->
           <div class="candles-row">
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
+            <div class="candle" id="candle-1">
+              <div class="flame"></div>
+            </div>
+            <div class="candle" id="candle-2">
+              <div class="flame"></div>
+            </div>
+            <div class="candle" id="candle-3">
+              <div class="flame"></div>
+            </div>
           </div>
-          <!-- Dripping Aesthetic Cake Design -->
+          <!-- 3D/Realistic Dripping Chocolate Cake Design -->
           <div class="dripping-icing"></div>
-          <div class="cake-layer dark-layer"></div>
-          <div class="cake-layer light-layer"></div>
+          <div class="cake-layer layer-1"></div>
+          <div class="cake-layer layer-2"></div>
+          <div class="cake-base"></div>
         </div>
         <div class="swipe-line" id="swipe-line"></div>
       </div>
