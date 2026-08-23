@@ -448,102 +448,130 @@ body, html {
 .letter-content p { margin-bottom: 12px; color: #cbd5e1; }
 .signature { font-weight: bold; color: #fbbf24; margin-top: 15px; }
 
-/* SCENE 5: GALAXY & 16:9 POLAROIDS WITH HIGH FLOATING */
+/* SCENE 5: MAGICAL GALAXY & LARGE EXPANDED POLAROIDS */
 #scene-galaxy {
-  background: #090d16;
+  background: radial-gradient(circle at center, #090d1a 0%, #030508 100%);
   color: white;
   position: relative;
   overflow: hidden;
 }
 
+/* Gorgeous Starry Galaxy Background with Glowing Nebulas */
 .stars-bg {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
-              radial-gradient(2px 2px at 40px 70px, #fbbf24, rgba(0,0,0,0));
-  background-size: 200px 200px;
-  opacity: 0.6;
+  background-image: 
+    radial-gradient(2px 2px at 30px 40px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 150px 180px, #fbbf24, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 300px 100px, #67e8f9, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 500px 300px, #f43f5e, rgba(0,0,0,0)),
+    radial-gradient(2.5px 2.5px at 700px 150px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 900px 450px, #fbbf24, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 600px 600px;
+  animation: galaxyTwinkle 10s linear infinite;
+  opacity: 0.85;
+}
+
+@keyframes galaxyTwinkle {
+  0% { transform: translateY(0) scale(1); opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-30px) scale(1.02); opacity: 0.7; }
 }
 
 .galaxy-title {
   position: absolute;
-  top: 30px;
+  top: 25px;
   text-align: center;
-  z-index: 2;
+  z-index: 10;
 }
 
 .galaxy-title h2 {
-  background: linear-gradient(to right, #f43f5e, #fbbf24);
+  font-size: 2rem;
+  background: linear-gradient(to right, #f43f5e, #fbbf24, #06b6d4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 15px rgba(244,63,94,0.4));
+}
+
+.galaxy-title p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-top: 4px;
 }
 
 .floating-container {
   position: relative;
   width: 100%;
-  height: 80%;
+  height: 100%;
+  max-width: 1300px;
+  max-height: 750px;
+  margin: 0 auto;
 }
 
+/* Larger Polaroid Frames to fill the screen nicely */
 .polaroid {
   position: absolute;
-  width: 170px;
+  width: 290px;
   background: white;
-  padding: 10px 10px 16px 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-  border-radius: 8px;
+  padding: 14px 14px 22px 14px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 25px rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
   text-align: center;
   color: #333;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 16:9 Ratio Setup for Images */
+/* Object-fit contain to ensure full photo is completely visible without cropping */
 .polaroid img {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: 4px;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background-color: #0f172a;
+  border-radius: 6px;
   display: block;
 }
 
 .polaroid span {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  margin-top: 8px;
+  margin-top: 10px;
   display: block;
   color: #1e293b;
 }
 
 .polaroid:hover {
-  transform: scale(1.12) translateY(-10px) rotate(0deg) !important;
-  box-shadow: 0 25px 50px rgba(244, 63, 94, 0.5);
+  transform: scale(1.1) translateY(-10px) rotate(0deg) !important;
+  box-shadow: 0 25px 50px rgba(244, 63, 94, 0.6), 0 0 30px rgba(251, 191, 36, 0.4);
   z-index: 50;
 }
 
-/* Heavy & High Floating Animations for 4 Photos */
-.p1 { top: 18%; left: 12%; animation: floatHeavy1 4s ease-in-out infinite alternate; }
-.p2 { top: 20%; right: 12%; animation: floatHeavy2 4.5s ease-in-out infinite alternate; }
-.p3 { bottom: 18%; left: 15%; animation: floatHeavy3 3.8s ease-in-out infinite alternate; }
-.p4 { bottom: 18%; right: 15%; animation: floatHeavy4 4.2s ease-in-out infinite alternate; }
+/* Spread out across the entire screen corners and edges */
+.p1 { top: 15%; left: 5%; animation: floatLarge1 5s ease-in-out infinite alternate; }
+.p2 { top: 15%; right: 5%; animation: floatLarge2 5.5s ease-in-out infinite alternate; }
+.p3 { bottom: 8%; left: 6%; animation: floatLarge3 4.8s ease-in-out infinite alternate; }
+.p4 { bottom: 8%; right: 6%; animation: floatLarge4 5.2s ease-in-out infinite alternate; }
 
-@keyframes floatHeavy1 {
+@keyframes floatLarge1 {
   0% { transform: translateY(0px) rotate(-6deg); }
-  100% { transform: translateY(-45px) rotate(-2deg); }
+  100% { transform: translateY(-25px) rotate(-2deg); }
 }
 
-@keyframes floatHeavy2 {
-  0% { transform: translateY(0px) rotate(5deg); }
-  100% { transform: translateY(50px) rotate(9deg); }
+@keyframes floatLarge2 {
+  0% { transform: translateY(0px) rotate(6deg); }
+  100% { transform: translateY(25px) rotate(2deg); }
 }
 
-@keyframes floatHeavy3 {
+@keyframes floatLarge3 {
   0% { transform: translateY(0px) rotate(4deg); }
-  100% { transform: translateY(-50px) rotate(-2deg); }
+  100% { transform: translateY(-25px) rotate(-1deg); }
 }
 
-@keyframes floatHeavy4 {
-  0% { transform: translateY(0px) rotate(-5deg); }
-  100% { transform: translateY(45px) rotate(-1deg); }
+@keyframes floatLarge4 {
+  0% { transform: translateY(0px) rotate(-4deg); }
+  100% { transform: translateY(25px) rotate(2deg); }
 }
 
 @keyframes flicker {
