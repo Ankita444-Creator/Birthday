@@ -48,12 +48,13 @@
     </div>
   </div>
 
-  <!-- SCENE 2: YELLOW ROSE TRANSITION -->
+  <!-- SCENE 2: YELLOW ROSE FLORAL & STRING -->
   <div id="scene-floral" class="scene">
+    <div class="floral-bg"></div>
     <div class="floral-overlay">
       <div class="string-wrapper" id="string-wrapper">
-        <div class="hanging-bulb">💡</div>
-        <div class="string"></div>
+        <div id="interactive-element" class="hanging-bulb">💡</div>
+        <div class="string" id="pull-string"></div>
         <div class="handle"></div>
       </div>
       <p class="pull-text">Drag or pull the string down to unwrap! 💛</p>
@@ -64,12 +65,14 @@
   <div id="scene-cake" class="scene">
     <div class="cake-container">
       <h2>Swipe to Cut the Cake! 🎂</h2>
-      <p>Drag across the cake to make a cut</p>
+      <p>Drag horizontally across the cake to slice</p>
 
       <div class="cake-box" id="cake-box">
         <div class="pixel-cake">
-          <div class="candle">
-            <div class="flame"></div>
+          <div class="candles-row">
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
           </div>
           <div class="icing"></div>
           <div class="cake-layer layer-1"></div>
