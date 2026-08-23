@@ -451,13 +451,13 @@ body, html {
 .signature { font-weight: bold; color: #fbbf24; margin-top: 12px; }
 
 /* ========================================================
-   SCENE 5: MAGICAL GALAXY & RESPONSIVE POLAROIDS
+   SCENE 5: MAGICAL GALAXY & FLOATING POLAROIDS (FOR BOTH PHONE & LAPTOP)
    ======================================================== */
 #scene-galaxy {
   background: radial-gradient(circle at center, #0a0e1a 0%, #030508 100%);
   color: white;
   position: relative;
-  overflow-y: auto; /* মোবাইলে স্ক্রল করার সুবিধা যাতে গিনজি না হয় */
+  overflow: hidden;
   width: 100vw;
   height: 100vh;
 }
@@ -488,15 +488,17 @@ body, html {
 }
 
 .galaxy-title {
-  position: relative;
-  margin-top: 20px;
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
   z-index: 10;
   width: 100%;
 }
 
 .galaxy-title h2 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   background: linear-gradient(to right, #f43f5e, #fbbf24, #06b6d4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -509,26 +511,25 @@ body, html {
 
 .galaxy-title p {
   color: #94a3b8;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   margin-top: 2px;
 }
 
 .floating-container {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  max-width: 1100px;
-  height: calc(100vh - 100px);
-  margin: 0 auto;
+  height: 100%;
 }
 
-/* Polaroid base styling */
+/* Polaroid base styling with smaller width for phones so they fit side by side */
 .polaroid {
   position: absolute;
-  width: 240px;
+  width: 160px;
   background: white;
-  padding: 10px 10px 16px 10px;
+  padding: 8px 8px 14px 8px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.65);
-  border-radius: 10px;
+  border-radius: 8px;
   text-align: center;
   color: #333;
   cursor: pointer;
@@ -540,66 +541,70 @@ body, html {
   aspect-ratio: 4 / 3;
   object-fit: contain;
   background-color: #0f172a;
-  border-radius: 6px;
+  border-radius: 4px;
   display: block;
 }
 
 .polaroid span {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  margin-top: 6px;
+  margin-top: 5px;
   display: block;
   color: #1e293b;
 }
 
-/* --- LAPTOP / LARGE SCREEN ARRANGEMENT --- */
-@media (min-width: 768px) {
-  .p1 { top: 15%; left: 18%; animation: floatTight1 4s ease-in-out infinite alternate; }
-  .p2 { top: 15%; right: 18%; animation: floatTight2 4.5s ease-in-out infinite alternate; }
-  .p3 { bottom: 10%; left: 20%; animation: floatTight3 4.2s ease-in-out infinite alternate; }
-  .p4 { bottom: 10%; right: 20%; animation: floatTight4 4.8s ease-in-out infinite alternate; }
+.polaroid:hover {
+  transform: scale(1.08) translateY(-5px) rotate(0deg) !important;
+  box-shadow: 0 20px 40px rgba(244, 63, 94, 0.7);
+  z-index: 50;
 }
 
-@keyframes floatTight1 { 0% { transform: translateY(0px) rotate(-4deg); } 100% { transform: translateY(-12px) rotate(-1deg); } }
-@keyframes floatTight2 { 0% { transform: translateY(0px) rotate(4deg); } 100% { transform: translateY(12px) rotate(1deg); } }
-@keyframes floatTight3 { 0% { transform: translateY(0px) rotate(3deg); } 100% { transform: translateY(-12px) rotate(-2deg); } }
-@keyframes floatTight4 { 0% { transform: translateY(0px) rotate(-3deg); } 100% { transform: translateY(12px) rotate(2deg); } }
+/* --- RESPONSIVE POSITIONS FOR BOTH PHONE AND LAPTOP (ALWAYS FLOATING) --- */
+.p1 { top: 18%; left: 8%; animation: floatTight1 4s ease-in-out infinite alternate; }
+.p2 { top: 18%; right: 8%; animation: floatTight2 4.5s ease-in-out infinite alternate; }
+.p3 { bottom: 12%; left: 8%; animation: floatTight3 4.2s ease-in-out infinite alternate; }
+.p4 { bottom: 12%; right: 8%; animation: floatTight4 4.8s ease-in-out infinite alternate; }
 
-/* --- MOBILE SCREEN (PH) RESPONSIVE FIX (NO OVERLAPPING) --- */
-@media (max-width: 767px) {
-  #scene-galaxy {
-    overflow-y: auto !important;
-    height: 100vh;
-    padding-bottom: 40px;
-  }
-  
-  .floating-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    height: auto;
-    margin-top: 15px;
-    padding-bottom: 30px;
-  }
+@keyframes floatTight1 {
+  0% { transform: translateY(0px) rotate(-4deg); }
+  100% { transform: translateY(-10px) rotate(-1deg); }
+}
 
+@keyframes floatTight2 {
+  0% { transform: translateY(0px) rotate(4deg); }
+  100% { transform: translateY(10px) rotate(1deg); }
+}
+
+@keyframes floatTight3 {
+  0% { transform: translateY(0px) rotate(3deg); }
+  100% { transform: translateY(-10px) rotate(-2deg); }
+}
+
+@keyframes floatTight4 {
+  0% { transform: translateY(0px) rotate(-3deg); }
+  100% { transform: translateY(10px) rotate(2deg); }
+}
+
+/* Larger size for laptops/desktops */
+@media (min-width: 768px) {
   .polaroid {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    width: 82% !important;
-    max-width: 260px;
-    transform: none !important;
-    animation: none !important;
-    margin-bottom: 5px;
+    width: 260px;
+    padding: 12px 12px 18px 12px;
   }
-  
-  .polaroid:hover {
-    transform: scale(1.03) !important;
+  .polaroid span {
+    font-size: 0.9rem;
+    margin-top: 8px;
   }
+  .galaxy-title h2 {
+    font-size: 2.2rem;
+  }
+  .galaxy-title p {
+    font-size: 0.9rem;
+  }
+  .p1 { top: 22%; left: 24%; }
+  .p2 { top: 22%; right: 24%; }
+  .p3 { bottom: 14%; left: 26%; }
+  .p4 { bottom: 14%; right: 26%; }
 }
 
 .photo-modal {
