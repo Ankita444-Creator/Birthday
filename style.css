@@ -17,32 +17,111 @@ body, html {
   height: 100%;
   overflow: hidden;
   background: radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);
+  color: #fff;
 }
 
 .scene {
-  display: none;
-  width: 100vw;
-  height: 100vh;
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
+  display: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .scene.active {
   display: flex;
+  opacity: 1;
+  z-index: 5;
 }
 
-/* CONTINUOUS CONFETTI FOR LATER SCREENS */
+/* PASSCODE STYLING */
+.passcode-card {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 30px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  width: 340px;
+}
+
+.passcode-card h2 {
+  font-size: 1.8rem;
+  background: linear-gradient(to right, #f43f5e, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 5px;
+}
+
+.passcode-card p {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+}
+
+.passcode-display {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #fbbf24;
+  border-radius: 50%;
+  display: inline-block;
+  transition: 0.2s;
+}
+
+.dot.active {
+  background-color: #fbbf24;
+  box-shadow: 0 0 10px #fbbf24;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.keypad button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 14px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.keypad button:hover {
+  background: rgba(244, 63, 94, 0.2);
+  border-color: rgba(244, 63, 94, 0.5);
+  transform: scale(1.05);
+}
+
+.error-msg {
+  color: #f43f5e;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+/* CONTINUOUS CONFETTI */
 .confetti-container {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 99;
   overflow: hidden;
-  display: block; /* কন্টিনিউয়াস রাখার জন্য অন করে দেওয়া হলো */
+  display: block;
 }
 
 .confetti-piece {
@@ -56,355 +135,11 @@ body, html {
 }
 
 @keyframes fallConfetti {
-  0% {
-    transform: translateY(0) rotate(0deg) translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(105vh) rotate(720deg) translateX(60px);
-    opacity: 0.2;
-  }
-}
-/* SCENE 1: PASSCODE CARD */
-#scene-passcode {
-  background: radial-gradient(circle at top right, #3b0764, #1e1b4b, #0f172a);
+  0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg) translateX(60px); opacity: 0.2; }
 }
 
-.passcode-card {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 40px;
-  border-radius: 28px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  text-align: center;
-  max-width: 440px;
-  width: 90%;
-  color: #fff;
-}
-
-.passcode-card h2 {
-  font-weight: 600;
-  font-size: 1.8rem;
-  margin-bottom: 8px;
-  background: linear-gradient(to right, #f43f5e, #fbbf24);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.passcode-card p {
-  color: #cbd5e1;
-  font-size: 0.9rem;
-}
-
-.passcode-display {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 25px 0;
-}
-
-.dot {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 2px solid #fbbf24;
-  background: transparent;
-  transition: all 0.2s;
-}
-
-.dot.filled {
-  background: #fbbf24;
-  box-shadow: 0 0 10px #fbbf24;
-}
-
-.keypad {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 20px;
-}
-
-.keypad button {
-  padding: 16px;
-  font-size: 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.keypad button:active {
-  background: rgba(251, 191, 36, 0.3);
-  transform: scale(0.95);
-}
-
-.error-msg {
-  color: #f43f5e;
-  font-size: 0.85rem;
-  margin-top: 15px;
-  min-height: 18px;
-}
-
-/* SCENE 2: BIG BALLOON & STRING PULL */
-#scene-floral {
-  position: relative;
-  overflow: hidden;
-  background: radial-gradient(circle, #2e1065 0%, #0f172a 100%);
-}
-
-.aesthetic-bg-glow {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 30%, rgba(244, 63, 94, 0.25), transparent 60%);
-  z-index: 1;
-}
-
-.floral-overlay {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 45px;
-  border-radius: 24px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-}
-
-.string-wrapper {
-  position: relative;
-  height: 250px;
-  cursor: grab;
-  touch-action: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Big Realistic Balloon Styling */
-.big-balloon {
-  width: 70px;
-  height: 85px;
-  background: radial-gradient(circle at 30% 30%, #ff758c, #ff7eb3 40%, #c71585 100%);
-  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-  position: relative;
-  box-shadow: inset -6px -6px 15px rgba(0,0,0,0.3), 0 10px 20px rgba(244,63,94,0.4);
-  animation: floatBalloon 2s infinite alternate ease-in-out;
-}
-
-.balloon-gloss {
-  position: absolute;
-  top: 12px;
-  left: 15px;
-  width: 14px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
-  transform: rotate(-30deg);
-}
-
-/* Balloon Knot */
-.big-balloon::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 31px;
-  width: 8px;
-  height: 8px;
-  background: #c71585;
-  clip-path: polygon(50% 100%, 0 0, 100% 0);
-}
-
-@keyframes floatBalloon {
-  0% { transform: translateY(0) scale(1); }
-  100% { transform: translateY(-8px) scale(1.02); }
-}
-
-.string {
-  width: 2px;
-  height: 140px;
-  background: rgba(255, 255, 255, 0.6);
-  margin-top: -2px;
-  transition: height 0.1s;
-}
-
-.handle {
-  width: 16px;
-  height: 16px;
-  background: #fbbf24;
-  border-radius: 50%;
-  margin-top: -8px;
-  box-shadow: 0 0 10px #fbbf24;
-}
-
-.pull-text {
-  margin-top: 20px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
-
-/* SCENE 3: REALISTIC CAKE & CANDLE LIGHTING */
-#scene-cake {
-  background: radial-gradient(circle at bottom, #1e1b4b, #0f172a);
-  text-align: center;
-  color: white;
-}
-
-.cake-container h2 {
-  font-size: 1.8rem;
-  background: linear-gradient(to right, #f43f5e, #fbbf24);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 5px;
-}
-
-.cake-container p {
-  color: #94a3b8;
-  font-size: 0.95rem;
-}
-
-.cake-box {
-  position: relative;
-  width: 300px;
-  height: 260px;
-  margin: 30px auto;
-  cursor: ew-resize;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-}
-
-/* Realistic 3D/Shaded Cake Container */
-.realistic-cake {
-  width: 220px;
-  height: 170px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  position: relative;
-  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-}
-
-.candles-row {
-  display: flex;
-  gap: 28px;
-  margin-bottom: 6px;
-  z-index: 3;
-}
-
-.candle {
-  width: 10px;
-  height: 40px;
-  background: linear-gradient(90deg, #ff758c, #ff7eb3);
-  position: relative;
-  border-radius: 4px;
-  box-shadow: inset -2px 0 4px rgba(0,0,0,0.2);
-}
-
-.flame {
-  width: 12px;
-  height: 18px;
-  background: #fbbf24;
-  border-radius: 50% 50% 20% 20%;
-  position: absolute;
-  top: -18px;
-  left: -1px;
-  box-shadow: 0 0 12px #fbbf24, 0 0 20px #f59e0b;
-  opacity: 0; /* Initially unlit */
-  transform: scale(0);
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.flame.lit {
-  opacity: 1;
-  transform: scale(1);
-  animation: flicker 0.4s infinite alternate;
-}
-
-/* Dripping Chocolate Icing with Depth */
-.dripping-icing {
-  width: 205px;
-  height: 35px;
-  background: linear-gradient(135deg, #451a03, #270e01);
-  border-radius: 16px 16px 8px 8px;
-  position: relative;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-  z-index: 2;
-}
-
-.dripping-icing::after {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 15px;
-  width: 18px;
-  height: 18px;
-  background: #270e01;
-  border-radius: 0 0 10px 10px;
-  box-shadow: 45px 6px 0 #270e01, 95px 3px 0 #270e01, 140px 10px 0 #270e01;
-}
-
-.cake-layer {
-  width: 200px;
-  height: 45px;
-  background: linear-gradient(90deg, #78350f, #92400e, #78350f);
-  border-bottom: 3px solid #451a03;
-  border-radius: 4px;
-  z-index: 1;
-  box-shadow: inset 0 5px 10px rgba(0,0,0,0.3);
-}
-
-.cake-layer.layer-2 {
-  width: 215px;
-  height: 50px;
-  border-radius: 0 0 12px 12px;
-  background: linear-gradient(90deg, #451a03, #78350f, #451a03);
-}
-
-.swipe-line {
-  position: absolute;
-  height: 4px;
-  background: #f43f5e;
-  width: 0%;
-  top: 50%;
-  left: 0;
-  transition: width 0.1s;
-  box-shadow: 0 0 12px #f43f5e;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.btn {
-  padding: 12px 28px;
-  border: none;
-  background: linear-gradient(135deg, #f43f5e, #fbbf24);
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  border-radius: 30px;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
-  transition: transform 0.2s;
-  margin-top: 15px;
-}
-
-.btn:active {
-  transform: scale(0.95);
-}
-
-.btn.hidden { display: none; }
-
-/* SCENE 4: LETTER & ENVELOPE STYLING */
+/* SCENE 4: LETTER & ENVELOPE */
 #scene-letter {
   background: radial-gradient(circle, #3b0764 0%, #0f172a 100%);
 }
@@ -419,7 +154,6 @@ body, html {
   width: 100%;
 }
 
-/* Balanced Title & Yellow Heart */
 .letter-title {
   font-size: 2.1rem;
   font-weight: 600;
@@ -427,19 +161,16 @@ body, html {
   background: linear-gradient(to right, #f43f5e, #fbbf24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 0.5px;
-  text-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .heart-symbol {
-  -webkit-text-fill-color: initial; /* Gradient থেকে মুক্ত করার জন্য */
+  -webkit-text-fill-color: initial;
   display: inline-block;
   font-size: 1.8rem;
   vertical-align: middle;
   filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.6));
 }
 
-/* Bigger Envelope Box & Perfectly Adjusted Text */
 .envelope {
   width: 360px;
   height: 220px;
@@ -450,17 +181,15 @@ body, html {
   align-items: center;
   color: white;
   font-weight: 600;
-  font-size: 1.45rem; /* টেক্সট বড় ও ব্যালেন্সড করা হলো */
-  letter-spacing: 0.5px;
+  font-size: 1.45rem;
   cursor: pointer;
   box-shadow: 0 20px 45px rgba(244, 63, 94, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .envelope:hover {
   transform: scale(1.06);
-  box-shadow: 0 25px 55px rgba(244, 63, 94, 0.55);
 }
 
 .letter-modal {
@@ -508,7 +237,25 @@ body, html {
   color: #fbbf24;
   margin-top: 15px;
 }
-/* SCENE 5: STARRY GALAXY GALLERY */
+
+.btn {
+  background: linear-gradient(135deg, #f43f5e, #fbbf24);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 10px 20px rgba(244, 63, 94, 0.3);
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* SCENE 5: STARRY GALAXY GALLERY (16:9 FLOATING CARDS) */
 #scene-galaxy {
   background: radial-gradient(circle, #1e1b4b 0%, #030712 100%);
   overflow: hidden;
@@ -517,7 +264,7 @@ body, html {
 
 .galaxy-title {
   text-align: center;
-  padding-top: 30px;
+  padding-top: 25px;
   z-index: 2;
   position: relative;
 }
@@ -534,12 +281,11 @@ body, html {
   font-size: 0.95rem;
 }
 
-/* Floating Container Layout */
 .floating-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-  padding: 30px 50px;
+  gap: 20px;
+  padding: 20px 40px;
   max-width: 1100px;
   margin: 0 auto;
   align-items: center;
@@ -548,11 +294,10 @@ body, html {
   position: relative;
 }
 
-/* Bigger Polaroids with 16:9 Ratio & Floating Animation */
 .polaroid {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 12px 12px 18px 12px;
+  padding: 10px 10px 15px 10px;
   border-radius: 16px;
   cursor: pointer;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
@@ -562,15 +307,8 @@ body, html {
   animation: floatCard 4s ease-in-out infinite alternate;
 }
 
-.polaroid:nth-child(even) {
-  animation-duration: 5s;
-  animation-delay: 1s;
-}
-
-.polaroid:nth-child(3) {
-  animation-duration: 4.5s;
-  animation-delay: 0.5s;
-}
+.polaroid:nth-child(even) { animation-duration: 5s; animation-delay: 1s; }
+.polaroid:nth-child(3) { animation-duration: 4.5s; animation-delay: 0.5s; }
 
 @keyframes floatCard {
   0% { transform: translateY(0px) rotate(0deg); }
@@ -583,7 +321,6 @@ body, html {
   border-color: rgba(244, 63, 94, 0.5);
 }
 
-/* 16:9 Image Box */
 .polaroid img {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -595,14 +332,13 @@ body, html {
 .polaroid span {
   display: block;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 8px;
   font-weight: 600;
   color: #f8fafc;
   font-size: 0.95rem;
-  letter-spacing: 0.5px;
 }
 
-/* Modal Popup for Enlarged View */
+/* Modal Popup */
 .photo-modal {
   position: fixed;
   inset: 0;
@@ -615,9 +351,7 @@ body, html {
   padding: 20px;
 }
 
-.photo-modal.hidden {
-  display: none;
-}
+.photo-modal.hidden { display: none; }
 
 .modal-card {
   background: rgba(30, 41, 59, 0.95);
