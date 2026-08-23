@@ -650,3 +650,52 @@ body, html {
   0% { transform: translateY(0px) rotate(3deg) scale(1); }
   100% { transform: translateY(38px) rotate(-3deg) scale(1.03); }
 }
+/* Unique Scattered Positions & High Floating Animations for 4 Photos */
+.p1 { top: 15%; left: 12%; animation: floatHeavy1 4s ease-in-out infinite alternate; }
+.p2 { top: 18%; right: 12%; animation: floatHeavy2 4.5s ease-in-out infinite alternate; }
+.p3 { bottom: 15%; left: 15%; animation: floatHeavy3 3.8s ease-in-out infinite alternate; }
+.p4 { bottom: 15%; right: 15%; animation: floatHeavy4 4.2s ease-in-out infinite alternate; }
+
+@keyframes floatHeavy1 {
+  0% { transform: translateY(0px) rotate(-6deg); }
+  100% { transform: translateY(-40px) rotate(-2deg); }
+}
+
+@keyframes floatHeavy2 {
+  0% { transform: translateY(0px) rotate(5deg); }
+  100% { transform: translateY(45px) rotate(9deg); }
+}
+
+@keyframes floatHeavy3 {
+  0% { transform: translateY(0px) rotate(4deg); }
+  100% { transform: translateY(-45px) rotate(-2deg); }
+}
+
+@keyframes floatHeavy4 {
+  0% { transform: translateY(0px) rotate(-5deg); }
+  100% { transform: translateY(40px) rotate(-1deg); }
+}
+
+.polaroid:hover {
+  transform: scale(1.12) translateY(-10px) rotate(0deg) !important;
+  box-shadow: 0 25px 50px rgba(244, 63, 94, 0.5);
+  border-color: rgba(244, 63, 94, 0.7);
+  z-index: 50;
+}
+
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.polaroid span {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  font-weight: 600;
+  color: #f8fafc;
+  font-size: 0.9rem;
+}
