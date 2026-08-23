@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Bestie! ✨</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Sacramento&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="assets/song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- SCENE 1: PASSCODE ENTRY -->
+  <div id="scene-passcode" class="scene active">
+    <div class="passcode-card">
+      <div class="header-icon">✨</div>
+      <h2>Enter Passcode</h2>
+      <p>Enter the 6-digit secret code to unlock</p>
+      
+      <div class="passcode-display">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+
+      <div class="keypad">
+        <button onclick="pressKey('1')">1</button>
+        <button onclick="pressKey('2')">2</button>
+        <button onclick="pressKey('3')">3</button>
+        <button onclick="pressKey('4')">4</button>
+        <button onclick="pressKey('5')">5</button>
+        <button onclick="pressKey('6')">6</button>
+        <button onclick="pressKey('7')">7</button>
+        <button onclick="pressKey('8')">8</button>
+        <button onclick="pressKey('9')">9</button>
+        <button onclick="clearKeypad()">C</button>
+        <button onclick="pressKey('0')">0</button>
+        <button onclick="deleteKey()">⌫</button>
+      </div>
+      <p id="error-msg" class="error-msg"></p>
+    </div>
+  </div>
+
+  <!-- SCENE 2: YELLOW ROSE TRANSITION -->
+  <div id="scene-floral" class="scene">
+    <div class="floral-overlay">
+      <div class="string-wrapper" id="string-wrapper">
+        <div class="hanging-bulb">💡</div>
+        <div class="string"></div>
+        <div class="handle"></div>
+      </div>
+      <p class="pull-text">Drag or pull the string down to unwrap! 💛</p>
+    </div>
+  </div>
+
+  <!-- SCENE 3: CAKE CUTTING -->
+  <div id="scene-cake" class="scene">
+    <div class="cake-container">
+      <h2>Swipe to Cut the Cake! 🎂</h2>
+      <p>Drag across the cake to make a cut</p>
+
+      <div class="cake-box" id="cake-box">
+        <div class="pixel-cake">
+          <div class="candle">
+            <div class="flame"></div>
+          </div>
+          <div class="icing"></div>
+          <div class="cake-layer layer-1"></div>
+          <div class="cake-layer layer-2"></div>
+        </div>
+        <div class="swipe-line" id="swipe-line"></div>
+      </div>
+
+      <button id="next-to-letter" class="btn hidden" onclick="goToScene('scene-letter')">Next Scene ➔</button>
+    </div>
+  </div>
+
+  <!-- SCENE 4: LETTER -->
+  <div id="scene-letter" class="scene">
+    <div class="letter-container">
+      <h2>A Special Note For You 💌</h2>
+      <div class="envelope" id="envelope" onclick="openLetter()">
+        <div class="envelope-flap"></div>
+        <div class="envelope-paper">Tap to Open</div>
+      </div>
+
+      <div class="letter-modal hidden" id="letter-modal">
+        <div class="letter-content">
+          <h3>Dear Best Friend, Happy Birthday, my Sunshine! ✨</h3>
+          <p>Not all deep bonds need romantic tags; a pure, platonic connection like ours is truly rare and precious. You've been my constant support, my partner in crime, and the person who makes even the dullest days brighter.</p>
+          <p>You've seen every version of me—the silly, the serious, the messy, and everything in between—and you've loved me through it all. Every moment we share feels like a memory wrapped in laughter, comfort, and genuine care.</p>
+          <p>Thank you for being my anchor in every sense, for standing by me, and for making life so much better just by being in it. May this year bring you endless happiness, peace, and all that you wish for. Let's share unlimited laughs, fights, and adventures ahead.</p>
+          <p class="signature">Happiest Birthday again! You are and always will be my bestest friend. 💛</p>
+          <button class="btn" onclick="goToScene('scene-galaxy')">See Our Galaxy ➔</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 5: STARRY GALAXY PHOTO GALLERY -->
+  <div id="scene-galaxy" class="scene">
+    <div class="stars-bg"></div>
+    <div class="galaxy-title">
+      <h2>Floating Memories 🌌</h2>
+      <p>Click on any frame to view</p>
+    </div>
+
+    <div class="floating-container">
+      <div class="polaroid" onclick="showPhotoModal('assets/photo1.jpg', 'Partner in Crime! 💛')">
+        <img src="assets/photo1.jpg" alt="Memory 1">
+        <span>Sunshine</span>
+      </div>
+      <div class="polaroid" onclick="showPhotoModal('assets/photo2.jpg', 'Best Times Ever ✨')">
+        <img src="assets/photo2.jpg" alt="Memory 2">
+        <span>Bestie</span>
+      </div>
+      <div class="polaroid" onclick="showPhotoModal('assets/photo3.jpg', 'Always Laughing Together 😃')">
+        <img src="assets/photo3.jpg" alt="Memory 3">
+        <span>Unstoppable</span>
+      </div>
+      <div class="polaroid" onclick="showPhotoModal('assets/photo4.jpg', 'Crazy Moments 📸')">
+        <img src="assets/photo4.jpg" alt="Memory 4">
+        <span>Iconic</span>
+      </div>
+      <div class="polaroid" onclick="showPhotoModal('assets/photo5.jpg', 'Forever & Always 💫')">
+        <img src="assets/photo5.jpg" alt="Memory 5">
+        <span>My Anchor</span>
+      </div>
+    </div>
+
+    <!-- Photo Modal -->
+    <div id="photo-modal" class="photo-modal hidden" onclick="closePhotoModal()">
+      <div class="modal-card">
+        <img id="modal-img" src="" alt="Enlarged Memory">
+        <p id="modal-caption"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
